@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー｜Yoshiki Apps</title>
+<meta name="description" content="Yoshiki Apps および提供ツール（Googleビジネスプロフィール管理ツールを含む）のプライバシーポリシー。Google APIで取得するデータの取り扱いと、Limited Useへの準拠について記載しています。">
+<style>
+  :root{--ink:#1d2230;--sub:#5a6378;--accent:#2563eb;--bg:#fafbfd;--card:#ffffff;--line:#e6e9f0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.8}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  header{padding:72px 0 48px;border-bottom:1px solid var(--line);background:var(--card)}
+  h1{font-size:2rem;letter-spacing:.02em}
+  .tagline{color:var(--sub);margin-top:8px;font-size:1.05rem}
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.2rem;color:var(--accent);margin-bottom:18px}
+  h3{font-size:1.02rem;margin:18px 0 6px}
+  p{margin:10px 0;color:var(--ink)}
+  ul{list-style:none;margin:8px 0}
+  li{padding:8px 0 8px 1.4em;position:relative;color:var(--ink)}
+  li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0;color:var(--sub);font-size:.95rem}
+  .muted{color:var(--sub);font-size:.95rem}
+  footer{padding:36px 0 56px;color:var(--sub);font-size:.9rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>プライバシーポリシー</h1>
+    <p class="tagline">Yoshiki Apps および提供ツール</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="muted">最終更新日：2026年6月13日</p>
+    <p>Yoshiki Apps（以下「当方」）は、当方が提供するアプリケーションおよびツール（Googleビジネスプロフィール管理ツールを含みます。以下「本ツール」）における、利用者の情報の取り扱いについて、本プライバシーポリシーを定めます。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>1. 取得する情報</h2>
+    <p>本ツールは、利用者が明示的に許可（OAuth同意）した場合に限り、利用者自身が管理するGoogleビジネスプロフィールに関する以下のデータへアクセスします。</p>
+    <ul>
+      <li>ビジネス基本情報（店舗名・住所・営業時間・カテゴリ等）</li>
+      <li>クチコミおよびクチコミへの返信</li>
+      <li>投稿（ローカル投稿）</li>
+      <li>パフォーマンス指標（表示回数・電話・ルート検索などの統計）</li>
+      <li>質問と回答（Q&amp;A）、写真などのメディア</li>
+      <li>新着クチコミ等の通知</li>
+      <li>OAuth認証に用いるアカウントのメールアドレス</li>
+    </ul>
+    <p>本ツールは、利用者本人が管理権限を持つビジネスプロフィールのみにアクセスし、それ以外のプロフィールにはアクセスしません。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>2. 情報の利用目的</h2>
+    <ul>
+      <li>利用者がクチコミを閲覧し、返信できるようにするため</li>
+      <li>利用者が選択した場合に、返信の下書きをAIで生成するため（生成された下書きは、利用者が確認・承認したうえで投稿されます）</li>
+      <li>投稿の作成・予約・公開を行うため</li>
+      <li>パフォーマンス指標を可視化するため</li>
+      <li>新着クチコミ等を利用者へ通知するため（LINE通知を含む）</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>3. 情報の保存場所</h2>
+    <p>本ツールはセルフホスト型で動作します。取得したビジネスプロフィールのデータは、原則として<strong>利用者自身が用意したインフラ（利用者名義のCloudflareアカウント等）</strong>に保存され、当方が中央のサーバーで利用者のビジネスデータを蓄積することはありません。</p>
+    <p>OAuthのアクセストークン・更新トークンは暗号化して保管します。かんたん接続（ハイブリッド）構成を選択した場合、認証トークンの発行・更新のみを当方が運用する小規模な窓口が中継しますが、クチコミ等の本体データは利用者の環境とGoogleの間で直接やり取りされ、当該窓口を経由しません。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>4. 第三者への提供・共有</h2>
+    <p>当方は、利用者のデータを販売しません。データの共有は、以下の目的に必要な範囲に限られます。</p>
+    <ul>
+      <li><strong>Google</strong>：利用者が指示した操作（クチコミ返信・投稿など）を実行するため</li>
+      <li><strong>利用者が選択したAIプロバイダ</strong>（例：Groq、Google Gemini、Cloudflare Workers AI など）：返信下書きの生成のため。AI利用は利用者自身のAPIキー（BYOK）で行われ、送信される内容は当該プロバイダの規約に従って取り扱われます</li>
+      <li>法令に基づき開示が必要な場合</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>5. Google ユーザーデータの限定利用（Limited Use）</h2>
+    <div class="note">
+      <p>本ツールによるGoogle APIから受領した情報の使用および他アプリへの転送は、<strong>Google API Services User Data Policy</strong>（<a href="https://developers.google.com/terms/api-services-user-data-policy">Limited Use 要件を含む</a>）に準拠します。</p>
+    </div>
+    <p>具体的には、当方は次を遵守します。</p>
+    <ul>
+      <li>Google APIから取得したデータは、本ポリシー記載の機能を利用者へ提供する目的にのみ使用します</li>
+      <li>当該データを広告目的で使用・転送しません</li>
+      <li>当該データを販売しません</li>
+      <li>人間による閲覧は、利用者の明示的同意がある場合、セキュリティ目的、法令遵守、または匿名化・集計済みデータの内部運用に必要な場合を除き行いません</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>6. 本ツールが行わないこと</h2>
+    <ul>
+      <li>検索順位のスクレイピングや推測（Googleの規約に反するため実装しません）</li>
+      <li>虚偽のクチコミの生成・依頼（景品表示法等に反するため実装しません）</li>
+      <li>AIによる返信の無断投稿（投稿前に必ず利用者の承認を経ます）</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>7. アクセスの取り消し</h2>
+    <p>利用者はいつでも、<a href="https://myaccount.google.com/permissions">Googleアカウントの権限設定</a>から本ツールへのアクセス許可を取り消すことができます。取り消し後、本ツールはGoogleビジネスプロフィールのデータへアクセスできなくなります。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>8. 改定</h2>
+    <p>本ポリシーは、必要に応じて改定することがあります。重要な変更がある場合は、本ページにて告知します。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>9. お問い合わせ</h2>
+    <p>本ポリシーに関するお問い合わせは、下記までお願いします。</p>
+    <p style="margin-top:10px"><a href="mailto:yosinn1@gmail.com">yosinn1@gmail.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Yoshiki Apps｜<a href="./">トップへ戻る</a></div>
+</footer>
+</body>
+</html>
