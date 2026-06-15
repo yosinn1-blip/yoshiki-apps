@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO Harness デモ｜Googleの口コミにAIが返信下書き（登録不要・0円）</title>
+<meta name="description" content="Googleビジネスプロフィールの口コミに、AIが返信の下書きを出すツールのサンプルです。登録不要・営業電話なし・その場で動きます。MEOチェキ等（月3,278円〜）の0円代替。AI返信は無料のGroqで生成。">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="MEO Harness デモ｜Googleの口コミにAIが返信下書き">
+<meta property="og:description" content="登録不要・営業電話なしで、AIの口コミ返信をその場で確認できるサンプル。MEOチェキ等の0円代替。">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#1d2230;--sub:#5a6378;--accent:#2563eb;--bg:#fafbfd;--card:#ffffff;--line:#e6e9f0;
+    --star:#f5a623;--good:#15803d;--good-bg:#e9f6ee;--bad:#b91c1c;--bad-bg:#fdecec;
+    --ai-bg:#f3f6fc;--ai-line:#dbe6fa;--radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.8;-webkit-text-size-adjust:100%}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent)}
+
+  header.hero{padding:64px 0 40px;background:var(--card);border-bottom:1px solid var(--line)}
+  .badge{display:inline-block;font-size:.78rem;letter-spacing:.04em;color:var(--accent);background:#eaf1ff;border:1px solid var(--ai-line);padding:4px 12px;border-radius:999px}
+  h1{font-size:1.72rem;letter-spacing:.01em;margin-top:16px}
+  .lead{color:var(--sub);margin-top:12px;font-size:1.05rem}
+  .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:.9rem;color:var(--sub)}
+  .trust span{display:inline-flex;align-items:center;gap:6px}
+  .trust b{color:var(--good);font-weight:700}
+
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.18rem;color:var(--accent);margin-bottom:6px}
+  .h2sub{color:var(--sub);font-size:.92rem;margin-bottom:20px}
+
+  .store{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .store-name{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+  .store-pin{color:var(--accent)}
+  .store-meta{font-size:.86rem;color:var(--sub)}
+  .note{font-size:.84rem;color:var(--sub);background:#f6f8fc;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:14px 0 26px}
+
+  .rev{padding:22px 0;border-top:1px solid var(--line)}
+  .rev:first-of-type{border-top:none}
+  .rev-head{display:flex;align-items:center;gap:12px}
+  .avatar{width:38px;height:38px;border-radius:50%;background:#eef1f7;color:var(--sub);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;flex-shrink:0}
+  .rev-meta{flex:1;min-width:0}
+  .rev-name{font-weight:700;font-size:.96rem}
+  .stars{font-size:.92rem;letter-spacing:1px}
+  .stars .on{color:var(--star)}
+  .stars .off{color:#d6dae3}
+  .rev-date{font-size:.82rem;color:var(--sub)}
+  .chip{font-size:.74rem;padding:2px 8px;border-radius:999px;background:var(--bad-bg);color:var(--bad);white-space:nowrap}
+  .chip.low{background:var(--bad-bg);color:var(--bad)}
+  .chip.high{background:var(--good-bg);color:var(--good)}
+  .rev-text{margin:10px 0 0;font-size:.96rem}
+
+  .draft{margin-top:12px;background:var(--ai-bg);border:1px solid var(--ai-line);border-radius:var(--radius);padding:12px 14px}
+  .draft-label{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--accent);font-weight:700}
+  .draft-text{margin:7px 0 0;font-size:.93rem;color:#27313f}
+  .draft-actions{display:flex;gap:8px;margin-top:12px}
+  button.copy{font:inherit;font-size:.82rem;color:var(--accent);background:#fff;border:1px solid var(--ai-line);border-radius:8px;padding:5px 12px;cursor:pointer;transition:background .15s}
+  button.copy:hover{background:#eaf1ff}
+  button.copy.done{color:var(--good);border-color:#bfe3cd;background:var(--good-bg)}
+
+  table.cmp{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:4px}
+  table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table.cmp thead th{background:#f3f6fc}
+  table.cmp td.us{color:var(--good);font-weight:700;background:#f4faf6}
+  table.cmp .x{color:var(--sub)}
+
+  .steps{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px}
+  .step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+  .step-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#eaf1ff;color:var(--accent);font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step b{font-size:.96rem}
+  .step p{color:var(--sub);font-size:.88rem;margin-top:2px}
+
+  .cta{text-align:center}
+  .cta .btn{display:inline-block;margin:6px 6px 0;padding:12px 22px;border-radius:10px;font-weight:700;font-size:.96rem;text-decoration:none}
+  .cta .btn.primary{background:var(--accent);color:#fff}
+  .cta .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--ai-line)}
+  .cta .soon{font-size:.86rem;color:var(--sub);margin-top:16px}
+
+  .disclaimer{font-size:.82rem;color:var(--sub);line-height:1.7}
+  footer{padding:30px 0 56px;color:var(--sub);font-size:.86rem;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">サンプル・架空店舗</span>
+    <h1>Googleの口コミに、AIが返信の下書きを出す。</h1>
+    <p class="lead">未返信の口コミを並べて、AIが返信案を用意します。あとは確認して返すだけ。下はその動きを見せるサンプルです。</p>
+    <div class="trust">
+      <span><b>登録不要</b></span>
+      <span><b>営業電話なし</b></span>
+      <span><b>0円</b>で動く</span>
+      <span>このページでそのまま確認</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="store">
+      <div class="store-name"><span class="store-pin">●</span>ヘアサロン ソフィア</div>
+      <div class="store-meta">未返信の口コミ <b>5件</b></div>
+    </div>
+    <div class="note">これは架空の店舗「ソフィア」のサンプルです。返信文は実際にAI（Groq / Llama-3.3-70B）が生成したものを載せています。実際のツールでは、<b>投稿前に必ずオーナーが内容を確認・編集</b>してから返信します。</div>
+
+    <div class="rev">
+      <div class="rev-head">
+        <div class="avatar">中</div>
+        <div class="rev-meta">
+          <div class="rev-name">中村 さやか</div>
+          <div class="stars"><span class="on">★</span><span class="off">★★★★</span> <span class="rev-date">5日前</span></div>
+        </div>
+        <span class="chip low">要対応</span>
+      </div>
+      <p class="rev-text">予約していたのに30分待たされました。カラーも希望と違う色に仕上がってがっかりです。</p>
+      <div class="draft">
+        <div class="draft-label">＋ AI返信下書き</div>
+        <p class="draft-text" id="d1">大変お待たせしたこと、ご希望と異なるカラーになってしまったこと、心よりお詫び申し上げます。予約の遅れやサービス内容の間違いなど、ご不満に思っていただいた点については、再発防止とサービス向上に努めてまいります。ご来店をご検討いただけるよう、改善に取り組んで参ります。</p>
+        <div class="draft-actions"><button class="copy" data-target="d1">下書きをコピー</button></div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rev-head">
+        <div class="avatar">高</div>
+        <div class="rev-meta">
+          <div class="rev-name">高橋 直樹</div>
+          <div class="stars"><span class="on">★★</span><span class="off">★★★</span> <span class="rev-date">2週間前</span></div>
+        </div>
+        <span class="chip low">要対応</span>
+      </div>
+      <p class="rev-text">技術は悪くないけど、スタッフ同士の私語が多くて落ち着けませんでした。</p>
+      <div class="draft">
+        <div class="draft-label">＋ AI返信下書き</div>
+        <p class="draft-text" id="d2">技術の質についてはご満足いただけたようで安心しましたが、スタッフ同士の私語が多くてご不快な思いをさせてしまったこと、大変申し訳ありません。スタッフのマナーについて再度指導を徹底し、より良いサービスを提供できるよう努めてまいります。ご来店いただいた際には、より落ち着いた雰囲気でお過ごしいただけるよう尽力します。再来店の機会をいただけますでしょうか。</p>
+        <div class="draft-actions"><button class="copy" data-target="d2">下書きをコピー</button></div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rev-head">
+        <div class="avatar">佐</div>
+        <div class="rev-meta">
+          <div class="rev-name">佐藤 みき</div>
+          <div class="stars"><span class="on">★★★★★</span> <span class="rev-date">3日前</span></div>
+        </div>
+        <span class="chip high">好評</span>
+      </div>
+      <p class="rev-text">カットもカラーも丁寧で、髪型の相談にもしっかり乗ってくれました。担当の田中さんありがとうございました！</p>
+      <div class="draft">
+        <div class="draft-label">＋ AI返信下書き</div>
+        <p class="draft-text" id="d3">田中さんを担当としてお選びいただき、ご満足いただけたようで大変嬉しく思います。カットやカラーの際にも細やかな相談に応じることを心がけておりますので、ご来店いただいた皆様にご満足いただけるよう、スタッフ一同努めてまいります。ご来店ありがとうございました。</p>
+        <div class="draft-actions"><button class="copy" data-target="d3">下書きをコピー</button></div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rev-head">
+        <div class="avatar">渡</div>
+        <div class="rev-meta">
+          <div class="rev-name">渡辺 ゆい</div>
+          <div class="stars"><span class="on">★★★★</span><span class="off">★</span> <span class="rev-date">1週間前</span></div>
+        </div>
+        <span class="chip high">好評</span>
+      </div>
+      <p class="rev-text">カットは良かったです。ただ予約が取りづらいのが難点。ネット予約がもっと充実すると嬉しいです。</p>
+      <div class="draft">
+        <div class="draft-label">＋ AI返信下書き</div>
+        <p class="draft-text" id="d4">ご来店頂きありがとうございます。カットが気に入って頂けたことを嬉しく思います。ただし、予約の取り方に不便を感じて頂き、誠に申し訳ございません。ネット予約のシステムを強化して、ご予約がよりスムーズに行えるように致します。再来店頂けることを心よりお待ちしております。</p>
+        <div class="draft-actions"><button class="copy" data-target="d4">下書きをコピー</button></div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rev-head">
+        <div class="avatar">E</div>
+        <div class="rev-meta">
+          <div class="rev-name">Emily R.</div>
+          <div class="stars"><span class="on">★★★★★</span> <span class="rev-date">1か月前</span></div>
+        </div>
+        <span class="chip high">好評</span>
+      </div>
+      <p class="rev-text">Great haircut and very friendly staff! Will come back next time I'm in Japan.</p>
+      <div class="draft">
+        <div class="draft-label">＋ AI返信下書き（英語の口コミには英語で返信）</div>
+        <p class="draft-text" id="d5">Thank you so much for your wonderful review. We're thrilled to hear that you enjoyed your haircut and our staff's hospitality. We can't wait to welcome you back to Sophia when you're next in Japan and provide you with another great experience.</p>
+        <div class="draft-actions"><button class="copy" data-target="d5">下書きをコピー</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>有料ツールとの違い</h2>
+    <p class="h2sub">いちばんの違いは「試すのに営業電話が要らない」こと。</p>
+    <table class="cmp">
+      <thead>
+        <tr><th>　</th><th>MEOチェキ / Canly（有料）</th><th>MEO Harness（このツール）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>料金</td><td class="x">月3,278円〜（契約6ヶ月〜）</td><td class="us">0円</td></tr>
+        <tr><td>試すには</td><td class="x">資料請求・デモ申込・営業電話</td><td class="us">登録不要・今すぐこの画面</td></tr>
+        <tr><td>AI返信の下書き</td><td class="x">○</td><td class="us">◎ Groq（無料・クレカ不要）</td></tr>
+        <tr><td>新着口コミ通知</td><td class="x">○</td><td class="us">◎ LINEにも流せる</td></tr>
+        <tr><td>検索順位の計測</td><td class="x">◎（看板機能）</td><td class="x">✕ あえて作らない※</td></tr>
+      </tbody>
+    </table>
+    <p class="disclaimer" style="margin-top:12px">※ 順位計測はGoogleの規約に反するスクレイピングが必要で、かつ閲覧者の位置で変わる推測値です。代わりに公式の実数（表示回数・電話・経路検索）で成果を測ります。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>自分の店で使うとどうなる？</h2>
+    <p class="h2sub">サンプルは架空店ですが、本番はあなたの実際の口コミで同じことをします。</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><b>Googleと接続（1クリック）</b><p>あなたが管理する店舗の口コミを読み込みます。</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><b>未返信の口コミにAIが下書き</b><p>上のサンプルと同じように、返信案が自動で用意されます。</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><b>確認して返信・新着はLINEに通知</b><p>内容を確認・編集してから返信。新しい口コミが来たらLINEでお知らせ。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 style="color:var(--ink)">完全オープンソース・サーバー代0円</h2>
+    <p class="h2sub" style="text-align:center">開発の経緯と仕組みはGitHubで公開しています。</p>
+    <a class="btn primary" href="https://github.com/yosinn1-blip">GitHubで開発を見る →</a>
+    <a class="btn ghost" href="index.html">Yoshiki Apps について</a>
+    <p class="soon">「自分の店で試す」（実データ版）は、GoogleビジネスプロフィールAPIの審査通過後に公開予定です。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">店舗名・口コミはすべて架空のサンプルです。返信文はAIが生成した実出力を掲載しています。AIによる返信は、実際の運用では投稿前に必ず人が確認します。</p>
+    <p style="margin-top:14px">© 2026 Yoshiki Apps｜<a href="privacy.html">プライバシーポリシー</a></p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      if(!el) return;
+      var text = el.textContent;
+      var done = function(){ var o = btn.textContent; btn.textContent = 'コピーしました'; btn.classList.add('done'); setTimeout(function(){ btn.textContent = o; btn.classList.remove('done'); }, 1600); };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
