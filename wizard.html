@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE通知の設置ウィザード｜MEO Harness</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{
+    --ink:#1d2230;--sub:#5a6378;--accent:#2563eb;--bg:#fafbfd;--card:#ffffff;--line:#e6e9f0;
+    --good:#15803d;--good-bg:#e9f6ee;--bad:#b91c1c;--bad-bg:#fdecec;
+    --ai-bg:#f3f6fc;--ai-line:#dbe6fa;--radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.8;-webkit-text-size-adjust:100%}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent)}
+
+  header.hero{padding:56px 0 36px;background:var(--card);border-bottom:1px solid var(--line)}
+  .badge{display:inline-block;font-size:.78rem;letter-spacing:.04em;color:var(--accent);background:#eaf1ff;border:1px solid var(--ai-line);padding:4px 12px;border-radius:999px}
+  h1{font-size:1.5rem;letter-spacing:.01em;margin-top:14px}
+  .lead{color:var(--sub);margin-top:10px;font-size:.98rem}
+
+  section{padding:34px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.08rem;color:var(--accent);margin-bottom:14px}
+
+  .note{font-size:.84rem;color:var(--sub);background:#f6f8fc;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:0 0 16px}
+
+  .steps{display:grid;grid-template-columns:1fr;gap:10px}
+  .step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+  .step-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#eaf1ff;color:var(--accent);font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step b{font-size:.94rem}
+  .step p{color:var(--sub);font-size:.86rem;margin-top:2px}
+
+  form{display:flex;flex-direction:column;gap:16px}
+  label{font-size:.88rem;font-weight:700;display:block;margin-bottom:6px}
+  label .opt{font-weight:400;color:var(--sub);font-size:.8rem}
+  input[type=text],input[type=password]{
+    width:100%;font:inherit;font-size:.95rem;padding:10px 12px;border:1px solid var(--line);
+    border-radius:8px;background:#fff;color:var(--ink);
+  }
+  input:focus{outline:2px solid var(--ai-line);border-color:var(--accent)}
+  .hint{font-size:.78rem;color:var(--sub);margin-top:5px}
+
+  button.submit{
+    font:inherit;font-size:.98rem;font-weight:700;color:#fff;background:var(--accent);
+    border:none;border-radius:10px;padding:13px 18px;cursor:pointer;transition:opacity .15s;
+  }
+  button.submit:hover{opacity:.9}
+  button.submit:disabled{opacity:.55;cursor:default}
+
+  .result{display:none;border-radius:var(--radius);padding:16px 18px;margin-top:4px}
+  .result.show{display:block}
+  .result.error{background:var(--bad-bg);border:1px solid #f3c9c9;color:var(--bad)}
+  .result.success{background:var(--good-bg);border:1px solid #bfe3cd;color:#1d2230}
+  .result h3{font-size:.96rem;margin-bottom:8px}
+  .result.error h3{color:var(--bad)}
+  .result.success h3{color:var(--good)}
+  .kv{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--ai-line);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:.88rem}
+  .kv code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.84rem;word-break:break-all}
+  button.copy{font:inherit;font-size:.78rem;color:var(--accent);background:#fff;border:1px solid var(--ai-line);border-radius:8px;padding:4px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+  button.copy:hover{background:#eaf1ff}
+  button.copy.done{color:var(--good);border-color:#bfe3cd;background:var(--good-bg)}
+
+  footer{padding:30px 0 56px;color:var(--sub);font-size:.86rem;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">設置ウィザード</span>
+    <h1>あなたのお店のLINEに、口コミ通知を送る設定</h1>
+    <p class="lead">お店専用のLINE公式アカウントを使って、新着の口コミ通知をLINEに届けます。登録はこの画面だけで完了します。</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>必要なもの・費用</h2>
+    <div class="note">
+      <b>0円で始められます。</b> LINE公式アカウント（未認証アカウント）は審査なしで誰でも作れます。月200通までの無料枠はお店ごとの口座に乗るため、複数店舗が増えてもYoshiki側に課金が集中する設計ではありません。1日1通のダイジェスト通知なら月30通程度で枠に余裕があります。
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>事前準備（LINE Developers Console）</h2>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><b>LINE公式アカウントを作成</b><p><a href="https://manager.line.biz/" target="_blank" rel="noopener">LINE Official Account Manager</a> でお店用のアカウントを作成（未認証アカウントでOK・審査不要）。</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><b>Messaging APIを有効化してチャネルアクセストークンを発行</b><p><a href="https://developers.line.biz/console/" target="_blank" rel="noopener">LINE Developers Console</a> で対象チャネルを開き「Messaging API設定」タブの「チャネルアクセストークン（長期）」を発行・コピー。</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><b>通知を受け取るuserIdを確認</b><p>同じチャネルの「チャネル基本設定」タブの下部にある「あなたのユーザーID」をコピー（これがLINE通知の送信先になります）。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>お店の情報を登録</h2>
+    <form id="signup-form">
+      <div>
+        <label for="businessName">店舗名 <span class="opt">（任意・通知に表示されます）</span></label>
+        <input type="text" id="businessName" placeholder="例: 炭火焼き 楽">
+      </div>
+      <div>
+        <label for="businessType">業種 <span class="opt">（任意）</span></label>
+        <input type="text" id="businessType" placeholder="例: 飲食店、美容室、整体院">
+      </div>
+      <div>
+        <label for="lineChannelToken">チャネルアクセストークン（長期） <span class="opt">必須</span></label>
+        <input type="password" id="lineChannelToken" required autocomplete="off">
+        <p class="hint">前後に空白が入っていないかご確認ください（コピー時の改行混入が一番多いミスです）。</p>
+      </div>
+      <div>
+        <label for="lineUserId">あなたのユーザーID <span class="opt">必須</span></label>
+        <input type="text" id="lineUserId" required autocomplete="off" placeholder="U で始まる文字列">
+      </div>
+      <button type="submit" class="submit" id="submit-btn">登録してLINE連携を確認</button>
+    </form>
+
+    <div class="result error" id="result-error">
+      <h3>登録できませんでした</h3>
+      <p id="error-message"></p>
+    </div>
+
+    <div class="result success" id="result-success">
+      <h3>登録が完了しました</h3>
+      <p>下の2つの値は今だけ表示されます。後で見返せないため、必ず控えてください。</p>
+      <div class="kv"><code id="out-storeId"></code><button class="copy" data-target="out-storeId">コピー</button></div>
+      <div class="kv"><code id="out-apiKey"></code><button class="copy" data-target="out-apiKey">コピー</button></div>
+      <p class="hint" style="margin-top:10px">実際の口コミ連携（Googleビジネスプロフィール）は、API審査の通過後に有効になります。それまでの間は手動でのテスト連携になります。ご不明点はYoshikiまでご連絡ください。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Yoshiki Apps｜<a href="index.html">Yoshiki Apps について</a></p>
+  </div>
+</footer>
+
+<script>
+  var WORKER_URL = 'https://meo-harness.yosinn1.workers.dev';
+
+  var form = document.getElementById('signup-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var resultError = document.getElementById('result-error');
+  var resultSuccess = document.getElementById('result-success');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    resultError.classList.remove('show');
+    resultSuccess.classList.remove('show');
+
+    var payload = {
+      businessName: document.getElementById('businessName').value.trim(),
+      businessType: document.getElementById('businessType').value.trim(),
+      lineChannelToken: document.getElementById('lineChannelToken').value.trim(),
+      lineUserId: document.getElementById('lineUserId').value.trim(),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '確認中…';
+
+    fetch(WORKER_URL + '/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(function(res){ return res.json().then(function(body){ return { ok: res.ok, body: body }; }); })
+      .then(function(r){
+        if (!r.ok) {
+          document.getElementById('error-message').textContent = (r.body && r.body.error) || '不明なエラーが発生しました。';
+          resultError.classList.add('show');
+          return;
+        }
+        document.getElementById('out-storeId').textContent = 'storeId: ' + r.body.storeId;
+        document.getElementById('out-apiKey').textContent = 'apiKey: ' + r.body.apiKey;
+        resultSuccess.classList.add('show');
+        form.reset();
+      })
+      .catch(function(){
+        document.getElementById('error-message').textContent = '通信に失敗しました。ネットワーク接続を確認して、もう一度お試しください。';
+        resultError.classList.add('show');
+      })
+      .finally(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = '登録してLINE連携を確認';
+      });
+  });
+
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      if(!el) return;
+      var text = el.textContent;
+      var done = function(){ var o = btn.textContent; btn.textContent = 'コピーしました'; btn.classList.add('done'); setTimeout(function(){ btn.textContent = o; btn.classList.remove('done'); }, 1600); };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
