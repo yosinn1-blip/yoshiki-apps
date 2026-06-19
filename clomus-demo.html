@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>clomus — 口コミ返信 Before / After</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", sans-serif; background: #f5f5f7; color: #1d1d1f; line-height: 1.6; }
+
+  header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 20px 24px; }
+  .header-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+  .salon-badge { background: #1d1d1f; color: #fff; font-weight: 700; font-size: 18px; letter-spacing: 2px; padding: 8px 16px; border-radius: 8px; }
+  .header-text h1 { font-size: 18px; font-weight: 700; }
+  .header-text p { font-size: 13px; color: #666; margin-top: 2px; }
+  .rating-badge { margin-left: auto; text-align: right; }
+  .rating-badge .stars { font-size: 20px; color: #f59e0b; }
+  .rating-badge .count { font-size: 12px; color: #888; }
+
+  .summary-bar { background: #fff7ed; border-bottom: 1px solid #fed7aa; padding: 12px 24px; }
+  .summary-bar-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .summary-stat { text-align: center; }
+  .summary-stat .num { font-size: 22px; font-weight: 700; color: #ea580c; }
+  .summary-stat .label { font-size: 12px; color: #666; }
+  .summary-arrow { font-size: 24px; color: #aaa; }
+  .summary-msg { font-size: 13px; color: #7c3aed; font-weight: 600; background: #f5f3ff; padding: 6px 12px; border-radius: 20px; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px; }
+
+  .card { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid #f0f0f0; }
+  .reviewer { display: flex; align-items: center; gap: 10px; }
+  .reviewer-avatar { width: 36px; height: 36px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #6b7280; }
+  .reviewer-info .name { font-weight: 600; font-size: 14px; }
+  .reviewer-info .meta { font-size: 12px; color: #888; }
+  .stars-row { color: #f59e0b; font-size: 14px; margin-top: 4px; }
+  .review-body { padding: 12px 20px 16px; font-size: 14px; color: #333; border-bottom: 1px solid #f0f0f0; background: #fafafa; }
+  .detail-tag { display: inline-block; background: #eff6ff; color: #2563eb; border-radius: 4px; padding: 2px 8px; font-size: 11px; margin-right: 4px; margin-top: 6px; }
+
+  .reply-section { padding: 0; }
+  .toggle-bar { display: flex; border-bottom: 1px solid #f0f0f0; }
+  .toggle-btn { flex: 1; padding: 10px; font-size: 13px; font-weight: 600; border: none; background: #f9fafb; cursor: pointer; color: #888; transition: all .2s; }
+  .toggle-btn.active-before { background: #fff7ed; color: #ea580c; border-bottom: 3px solid #ea580c; }
+  .toggle-btn.active-after  { background: #f0fdf4; color: #16a34a; border-bottom: 3px solid #16a34a; }
+  .reply-box { padding: 16px 20px; font-size: 14px; line-height: 1.75; min-height: 100px; display: none; }
+  .reply-box.visible { display: block; }
+  .reply-box.before { background: #fff7ed; }
+  .reply-box.after  { background: #f0fdf4; }
+  .char-count { margin-top: 8px; font-size: 11px; color: #aaa; text-align: right; }
+  .char-count strong { color: #ea580c; }
+  .char-count.after-count strong { color: #16a34a; }
+
+  .no-reply-badge { display: inline-block; background: #fee2e2; color: #dc2626; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+
+  footer { text-align: center; padding: 32px 16px; font-size: 12px; color: #aaa; }
+  footer a { color: #aaa; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="salon-badge">clomus</div>
+    <div class="header-text">
+      <h1>口コミ返信 — Before / After</h1>
+      <p>大阪市浪速区幸町 ／ Google マップ実際の口コミを使用したデモ</p>
+    </div>
+    <div class="rating-badge">
+      <div class="stars">★ 4.7</div>
+      <div class="count">114 件の口コミ</div>
+    </div>
+  </div>
+</header>
+
+<div class="summary-bar">
+  <div class="summary-bar-inner">
+    <div class="summary-stat">
+      <div class="num">〜20分</div>
+      <div class="label">返信1件あたりの作成時間（手書き）</div>
+    </div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-stat">
+      <div class="num">〜3分</div>
+      <div class="label">AI下書きを確認・微修正する時間</div>
+    </div>
+    <div class="summary-msg">✦ 口調・スタイル・文章の長さなども自由に調整できます</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- 口コミ1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="reviewer">
+        <div class="reviewer-avatar">致</div>
+        <div class="reviewer-info">
+          <div class="name">致致（ALVIN）</div>
+          <div class="meta">6ヶ月前 · ローカルガイド</div>
+          <div class="stars-row">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-body">
+      台湾から来ましたが、日本での美容院は初めてでした。店員さんも美容師さんもすごく親切で、翻訳を使いながら私の希望をしっかり聞いてくれて安心しました。仕上がりも大満足です！
+      <br>
+      <span class="detail-tag">🎨 パーマウルフカット</span>
+      <span class="detail-tag">✂️ 鈴木茜</span>
+    </div>
+    <div class="reply-section">
+      <div class="toggle-bar">
+        <button class="toggle-btn active-before" onclick="toggle(this, 'r1')">現在の返信（手書き）</button>
+        <button class="toggle-btn" onclick="toggle(this, 'r1', true)">AI 下書き</button>
+      </div>
+      <div id="r1-before" class="reply-box before visible">
+        この度はご来店、そして心温まる口コミをありがとうございます。日本の美容院が初めてとのことで、不安もあったかと思いますが、翻訳を使いながらご希望をしっかり共有でき、安心してお任せいただけたことをとても嬉しく思います。今回はパーマウルフカットでしたので、トップには動きが出やすいようパーマ（髪に立体感を出す施術）をかけ、毛先は軽さを出すカットで全体のバランスを整えました。例えば、乾かすだけで自然に束感が出るよう工夫しています。仕上がりにご満足いただけて何よりです。次回は、パーマを長持ちさせる保湿トリートメントや、スタイルを活かしたメンテナンスカットもおすすめです。またお会いできるのを楽しみにしております。
+        <div class="char-count"><strong>259文字</strong></div>
+      </div>
+      <div id="r1-after" class="reply-box after">
+        鈴木茜も喜んでいます。翻訳を使いながらご希望をしっかり聞けて、安心してお任せいただけたことが何よりも嬉しいです。仕上がりにもご満足いただけて、ありがとうございました。またいつでも来てください。
+        <div class="char-count after-count"><strong>99文字</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 口コミ2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="reviewer">
+        <div class="reviewer-avatar">S</div>
+        <div class="reviewer-info">
+          <div class="name">sawan N</div>
+          <div class="meta">4ヶ月前 · ローカルガイド</div>
+          <div class="stars-row">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-body">
+      お店に入ると、かわいい小型犬がお出迎えしてくれます。施術の際はその都度丁寧に説明していただき、乾かし方のコツも教えていただきました。スタッフの方々も適度な会話量で、初めてでもリラックスして過ごせました。仕上がりも、オーダー通りで大満足です。
+      <br>
+      <span class="detail-tag">✂️ 古賀さん</span>
+      <span class="detail-tag">💆 4STEPトリートメント・超音波ケアプロ</span>
+    </div>
+    <div class="reply-section">
+      <div class="toggle-bar">
+        <button class="toggle-btn active-before" onclick="toggle(this, 'r2')">現在の返信（手書き）</button>
+        <button class="toggle-btn" onclick="toggle(this, 'r2', true)">AI 下書き</button>
+      </div>
+      <div id="r2-before" class="reply-box before visible">
+        この度は温かいお言葉と素敵な口コミをありがとうございます。お店に入ると小型犬がお出迎えできるのも、癒しのひとときとして喜んでいただけてうれしいです。施術中の説明や乾かし方のコツも、少しでもご自宅でのケアに役立てていただければ幸いです。例えば、髪のまとまりやすさを保つための乾かし方や、超音波ケアプロによる髪の奥まで浸透させるケアのポイントなど、ご家庭で実践できるアドバイスもご案内しています。次回は、より一層髪の自然なツヤと柔らかさを引き出すために、トリートメントの種類や仕上げのスタイリング方法もご提案させていただきます。髪質や希望のスタイルに合わせて、最適なケアプランを一緒に考えさせていただきますね。今後もリラックスして通える空間を心掛けてまいりますので、またのご来店を心よりお待ちしております。
+        <div class="char-count"><strong>308文字</strong></div>
+      </div>
+      <div id="r2-after" class="reply-box after">
+        古賀さんも喜んでいます。小型犬のお出迎えや丁寧な説明など、くつろいでいただけたようで安心しました。オーダー通りの仕上がりで満足していただけて何よりです。またいつでも来てください。
+        <div class="char-count after-count"><strong>90文字</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 口コミ3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="reviewer">
+        <div class="reviewer-avatar">R</div>
+        <div class="reviewer-info">
+          <div class="name">ランスーネコ</div>
+          <div class="meta">5ヶ月前</div>
+          <div class="stars-row">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-body">
+      モモカさんという美容師さんに、とても丁寧にカット、カラー、トリートメントをしていただきました。初めはカットだけと思い飛び込みで入りましたが、モモカさんのすすめでカラーとトリートメントもプラスしてもらいとても満足しています！
+      <br>
+      <span class="detail-tag">✂️ モモカさん</span>
+    </div>
+    <div class="reply-section">
+      <div class="toggle-bar">
+        <button class="toggle-btn active-before" onclick="toggle(this, 'r3')">現在の返信（手書き）</button>
+        <button class="toggle-btn" onclick="toggle(this, 'r3', true)">AI 下書き</button>
+      </div>
+      <div id="r3-before" class="reply-box before visible">
+        この度は嬉しい口コミをいただき、本当にありがとうございます。担当させていただいたモモカです。カットは毛先のまとまりを意識し、扱いやすくなるよう毛量調整を行いました。カラーはお肌なじみを考えた色味を選び、トリートメントでは内部補修をしっかり行っています。お伝えしたドライヤーでの乾かし方や、毛先を軽く内巻きにする簡単セットも、ぜひ日常で試してみてください。仕上がりにご満足いただけてとても嬉しいです。次回は、色持ちを良くするためのメンテナンスカラーや、さらに手触りが良くなる集中補修トリートメントもおすすめです。またお会いできるのを楽しみにしております。
+        <div class="char-count"><strong>255文字</strong></div>
+      </div>
+      <div id="r3-after" class="reply-box after">
+        モモカも喜んでいます。飛び込みでのご来店で、カラーとトリートメントまで追加していただけて嬉しかったです。仕上がりにご満足いただけて何よりでした。またいつでも来てください。
+        <div class="char-count after-count"><strong>85文字</strong></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  このデモは Google マップに公開されている口コミを使用しています。AI 返信はあくまで下書きであり、投稿前にオーナーが確認・修正します。<br>
+  Powered by <a href="https://yosinn1-blip.github.io/yoshiki-apps/">MEO Harness</a>
+</footer>
+
+<script>
+function toggle(btn, id, isAfter = false) {
+  const bar = btn.closest('.toggle-bar');
+  bar.querySelectorAll('.toggle-btn').forEach(b => b.className = 'toggle-btn');
+  btn.classList.add(isAfter ? 'active-after' : 'active-before');
+
+  const section = btn.closest('.reply-section');
+  section.querySelectorAll('.reply-box').forEach(b => b.classList.remove('visible'));
+  section.querySelector(`#${id}-${isAfter ? 'after' : 'before'}`).classList.add('visible');
+}
+</script>
+</body>
+</html>
