@@ -8,22 +8,22 @@
   @media print {
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .no-print { display: none; }
-    .page-break { page-break-before: always; }
   }
 
   :root {
-    --ink: #1d2230;
-    --sub: #5a6378;
-    --accent: #2563eb;
-    --bg: #fafbfd;
+    --ink: #111827;
+    --sub: #6b7280;
+    --accent: #1d4ed8;
+    --accent-dark: #1e3a8a;
+    --accent-light: #eff6ff;
+    --accent-mid: #bfdbfe;
     --card: #ffffff;
-    --line: #e6e9f0;
-    --good: #15803d;
-    --good-bg: #e9f6ee;
-    --ai-bg: #f3f6fc;
-    --ai-line: #dbe6fa;
-    --warn-bg: #fffbeb;
-    --warn-line: #fde68a;
+    --border: #e5e7eb;
+    --bg-muted: #f3f4f6;
+    --line: #06C755;
+    --line-dark: #059142;
+    --line-light: #e8faf0;
+    --line-mid: #bbf7d0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,195 +31,206 @@
   body {
     font-family: "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
     color: var(--ink);
-    background: #e8ecf0;
-    line-height: 1.8;
+    background: #d1d5db;
+    line-height: 1.75;
   }
 
   .no-print {
-    text-align: center;
-    padding: 14px;
-    background: #333;
-    color: #fff;
-    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 24px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    font-size: .88rem;
+    color: var(--sub);
     position: sticky;
     top: 0;
     z-index: 10;
   }
+  .no-print strong { color: var(--ink); font-size: .9rem; }
   .no-print button {
-    margin-left: 12px;
-    padding: 6px 16px;
+    padding: 6px 18px;
     background: var(--accent);
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: .9rem;
+    font-size: .85rem;
+    font-weight: 600;
   }
-  .no-print a { color: #93c5fd; margin-left: 14px; font-size: .9rem; }
+  .no-print a { color: var(--accent); font-size: .85rem; text-decoration: none; }
 
   .page {
     width: 210mm;
     min-height: 297mm;
     background: var(--card);
     margin: 24px auto;
-    padding: 14mm 14mm 12mm;
-    box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* タイトル */
-  .doc-header {
-    border-bottom: 3px solid var(--accent);
-    padding-bottom: 14px;
-    margin-bottom: 22px;
+  /* ヒーロー */
+  .hero {
+    background: var(--accent-dark);
+    padding: 18px 15mm 16px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
-  .doc-badge {
-    display: inline-block;
-    background: var(--ai-bg);
-    border: 1px solid var(--ai-line);
-    color: var(--accent);
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-    padding: 3px 10px;
+  .hero-left {}
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
     border-radius: 999px;
-    margin-bottom: 8px;
+    font-size: .7rem;
+    font-weight: 600;
+    padding: 3px 11px;
+    margin-bottom: 10px;
+    color: #bfdbfe;
   }
-  .doc-title {
-    font-size: 1.4rem;
+  .hero h1 {
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--ink);
-    margin-bottom: 4px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    letter-spacing: -.02em;
   }
-  .doc-sub {
-    font-size: .84rem;
-    color: var(--sub);
+  .hero-sub {
+    font-size: .82rem;
+    color: #bfdbfe;
   }
-  .doc-time {
-    float: right;
-    background: var(--good-bg);
-    border: 1px solid #86efac;
-    color: var(--good);
-    font-size: .78rem;
+  .hero-time {
+    background: var(--line);
+    color: #fff;
+    font-size: .74rem;
     font-weight: 700;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 8px;
-    margin-top: -30px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* 本文 */
+  .body {
+    padding: 16px 15mm 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   /* 全体の流れ */
   .overview {
-    background: var(--ai-bg);
-    border: 1px solid var(--ai-line);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1.5px solid var(--border);
     border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 22px;
-  }
-  .overview-title {
-    font-size: .78rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: .06em;
-    margin-bottom: 10px;
-  }
-  .overview-steps {
-    display: flex;
-    gap: 0;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
   }
   .ov-step {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: .78rem;
-    color: var(--sub);
+    padding: 10px 10px 9px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+    position: relative;
   }
+  .ov-step:last-child { border-right: none; }
+  .ov-step.line-step { background: var(--line-light); }
   .ov-num {
     width: 22px;
     height: 22px;
     background: var(--accent);
     color: #fff;
     border-radius: 50%;
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    margin: 0 auto 6px;
   }
-  .ov-arrow { color: var(--accent); font-size: .8rem; }
+  .ov-step.line-step .ov-num { background: var(--line); }
+  .ov-label {
+    font-size: .72rem;
+    color: var(--sub);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .ov-step.line-step .ov-label { color: var(--line-dark); }
 
   /* ステップカード */
   .step {
-    margin-bottom: 20px;
-    border: 1px solid var(--line);
+    margin-bottom: 14px;
+    border: 1.5px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
   }
   .step-header {
-    background: var(--accent);
+    background: var(--accent-dark);
     color: #fff;
-    padding: 10px 16px;
+    padding: 9px 14px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .step-header.light {
-    background: var(--ai-bg);
-    color: var(--accent);
-    border-bottom: 1px solid var(--ai-line);
+  .step-header.line {
+    background: var(--line-dark);
   }
   .step-num {
-    width: 28px;
-    height: 28px;
-    background: rgba(255,255,255,.25);
+    width: 26px;
+    height: 26px;
+    background: rgba(255,255,255,.2);
     border-radius: 50%;
-    font-size: .82rem;
+    font-size: .8rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .step-header.light .step-num {
-    background: var(--accent);
-    color: #fff;
-  }
   .step-title {
-    font-size: .92rem;
+    font-size: .9rem;
     font-weight: 700;
     flex: 1;
   }
   .step-time {
-    font-size: .72rem;
+    font-size: .7rem;
     opacity: .85;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
-  .step-body {
-    padding: 14px 16px;
-  }
+  .step-time svg { width: 12px; height: 12px; }
+  .step-body { padding: 12px 14px; }
 
   /* 操作リスト */
   .op-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 7px;
   }
   .op-list li {
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    font-size: .84rem;
+    font-size: .82rem;
   }
   .op-num {
-    min-width: 22px;
-    height: 22px;
-    background: var(--ai-bg);
-    border: 1px solid var(--ai-line);
+    min-width: 20px;
+    height: 20px;
+    background: var(--accent-light);
+    border: 1.5px solid var(--accent-mid);
     border-radius: 50%;
-    font-size: .72rem;
+    font-size: .68rem;
     font-weight: 700;
     color: var(--accent);
     display: flex;
@@ -228,140 +239,164 @@
     flex-shrink: 0;
     margin-top: 2px;
   }
+  .step-header.line ~ .step-body .op-num {
+    background: var(--line-light);
+    border-color: var(--line-mid);
+    color: var(--line-dark);
+  }
   .op-text { color: var(--ink); line-height: 1.6; }
   .op-url {
     display: inline-block;
-    background: #f0f4ff;
-    border: 1px solid var(--ai-line);
-    border-radius: 4px;
-    padding: 1px 7px;
-    font-size: .78rem;
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: .75rem;
     color: var(--accent);
     font-family: monospace;
     word-break: break-all;
-    margin-top: 2px;
+    margin-top: 3px;
   }
 
-  /* 注意ボックス */
+  /* 注意・ヒント */
   .note {
-    background: var(--warn-bg);
-    border: 1px solid var(--warn-line);
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
     border-radius: 8px;
     padding: 8px 12px;
-    font-size: .78rem;
+    font-size: .77rem;
     color: #854d0e;
     margin-top: 10px;
     display: flex;
     gap: 8px;
+    align-items: flex-start;
   }
-  .note-icon { flex-shrink: 0; }
-
+  .note svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: #d97706; }
   .tip {
-    background: var(--good-bg);
-    border: 1px solid #86efac;
+    background: var(--line-light);
+    border: 1.5px solid var(--line-mid);
     border-radius: 8px;
     padding: 8px 12px;
-    font-size: .78rem;
-    color: #14532d;
+    font-size: .77rem;
+    color: var(--line-dark);
     margin-top: 8px;
     display: flex;
     gap: 8px;
+    align-items: flex-start;
   }
-
-  /* スクリーンショット枠 */
-  .ss-placeholder {
-    border: 2px dashed var(--ai-line);
+  .tip svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--line); }
+  .secure {
+    background: var(--accent-light);
+    border: 1.5px solid var(--accent-mid);
     border-radius: 8px;
-    background: var(--ai-bg);
-    height: 60px;
+    padding: 8px 12px;
+    font-size: .77rem;
+    color: var(--accent-dark);
+    margin-top: 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--sub);
-    font-size: .76rem;
-    margin-top: 8px;
+    gap: 8px;
+    align-items: flex-start;
   }
+  .secure svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
 
-  /* 入力項目表 */
+  /* 入力表 */
   .input-table {
     width: 100%;
     border-collapse: collapse;
     font-size: .8rem;
-    margin-top: 8px;
+    margin-top: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
   .input-table th {
-    background: var(--ai-bg);
-    border: 1px solid var(--line);
+    background: var(--bg-muted);
+    border-bottom: 1.5px solid var(--border);
     padding: 7px 10px;
     text-align: left;
     font-weight: 700;
     color: var(--sub);
-    white-space: nowrap;
+    font-size: .76rem;
   }
   .input-table td {
-    border: 1px solid var(--line);
-    padding: 7px 10px;
-    color: var(--ink);
+    border-top: 1px solid var(--border);
+    padding: 8px 10px;
   }
+  .input-table td:first-child { font-weight: 600; color: var(--ink); }
   .input-table .write-here {
     background: #fffbeb;
-    color: #854d0e;
+    color: #92400e;
     font-style: italic;
+    font-size: .76rem;
   }
 
-  /* 完了チェック */
+  /* チェックリスト */
   .checklist {
-    background: var(--good-bg);
-    border: 1px solid #86efac;
+    border: 1.5px solid var(--line-mid);
     border-radius: 12px;
-    padding: 14px 16px;
-    margin-top: 20px;
+    overflow: hidden;
+    margin-top: 14px;
   }
-  .checklist-title {
+  .checklist-header {
+    background: var(--line-dark);
+    color: #fff;
+    padding: 9px 14px;
     font-size: .82rem;
     font-weight: 700;
-    color: var(--good);
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
+  .checklist-header svg { width: 15px; height: 15px; }
+  .checklist-body { padding: 4px 14px; }
   .check-item {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: .82rem;
     color: var(--ink);
-    padding: 5px 0;
-    border-bottom: 1px solid #bbf7d0;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line-mid);
   }
   .check-item:last-child { border-bottom: none; }
   .check-box {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #86efac;
+    width: 17px;
+    height: 17px;
+    border: 2px solid var(--line);
     border-radius: 4px;
     flex-shrink: 0;
     background: #fff;
   }
 
   /* フッター */
-  .doc-footer {
-    margin-top: 24px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
+  .footer-bar {
+    background: var(--bg-muted);
+    border-top: 1.5px solid var(--border);
+    padding: 12px 15mm 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
     align-items: center;
+  }
+  .footer-contact {
     font-size: .74rem;
     color: var(--sub);
+    line-height: 1.8;
   }
-  .doc-footer strong { color: var(--accent); }
-
-  .page-break { page-break-before: always; }
+  .footer-contact strong { color: var(--ink); }
+  .footer-url-wrap { text-align: right; }
+  .footer-url-label { font-size: .7rem; color: var(--sub); margin-bottom: 2px; }
+  .footer-url {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
 </style>
 </head>
 <body>
 
 <div class="no-print">
-  MEO Harness セットアップ手順書（A4印刷用）
+  <strong>MEO Harness セットアップ手順書（A4印刷用）</strong>
   <button onclick="window.print()">印刷 / PDF保存</button>
   <a href="flyer.html">← チラシ</a>
   <a href="demo.html">→ デモを見る</a>
@@ -369,213 +404,249 @@
 
 <div class="page">
 
-  <!-- タイトル -->
-  <div class="doc-header">
-    <div class="doc-time">所要時間 約15〜20分</div>
-    <div class="doc-badge">MEO Harness セットアップガイド</div>
-    <div class="doc-title">はじめてのセットアップ手順書</div>
-    <div class="doc-sub">このガイドを上から順番に進めると、Googleの口コミ通知とAI返信下書きが使えるようになります</div>
-  </div>
-
-  <!-- 全体の流れ -->
-  <div class="overview">
-    <div class="overview-title">全体の流れ（4ステップ）</div>
-    <div class="overview-steps">
-      <div class="ov-step"><div class="ov-num">1</div>LINE公式アカウント作成（無料）</div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-step"><div class="ov-num">2</div>Messaging API有効化</div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-step"><div class="ov-num">3</div>アクセストークン取得</div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-step"><div class="ov-num">4</div>登録フォームで設定完了</div>
+  <!-- ヒーロー -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">MEO Harness セットアップガイド</div>
+      <h1>はじめてのセットアップ手順書</h1>
+      <div class="hero-sub">このガイドを上から順番に進めると、Googleの口コミ通知とAI返信下書きが使えるようになります</div>
+    </div>
+    <div class="hero-time">
+      所要時間<br>約15〜20分
     </div>
   </div>
 
-  <!-- STEP 1 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">1</div>
-      <div class="step-title">LINE公式アカウントを作成する</div>
-      <div class="step-time">⏱ 約5分</div>
-    </div>
-    <div class="step-body">
-      <ul class="op-list">
-        <li>
-          <div class="op-num">1</div>
-          <div class="op-text">スマートフォンまたはパソコンで下記URLを開く<br>
-            <span class="op-url">https://www.lycbiz.com/jp/signup/landingpage/lineoa/</span>
-          </div>
-        </li>
-        <li>
-          <div class="op-num">2</div>
-          <div class="op-text">「LINE公式アカウント 開設する（無料）」ボタンをクリックし、個人のLINEアカウントでログイン</div>
-        </li>
-        <li>
-          <div class="op-num">3</div>
-          <div class="op-text">必要情報を入力する<br>
-            ・アカウント名：店舗名（例：〇〇ヘアサロン）<br>
-            ・業種：美容（ヘアサロン等）<br>
-            ・メールアドレス：店舗用のメールアドレス
-          </div>
-        </li>
-        <li>
-          <div class="op-num">4</div>
-          <div class="op-text">「このプランにする」→「コミュニケーションプラン（無料）」を選択して完了</div>
-        </li>
-      </ul>
-      <div class="tip">💡 アカウント名はお客様に表示される名前です。後から変更できるので仮の名前でもOK</div>
-    </div>
-  </div>
+  <div class="body">
 
-  <!-- STEP 2 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">2</div>
-      <div class="step-title">Messaging APIを有効にする</div>
-      <div class="step-time">⏱ 約5分</div>
+    <!-- 全体の流れ -->
+    <div class="overview" style="margin-bottom:16px;">
+      <div class="ov-step line-step">
+        <div class="ov-num">1</div>
+        <div class="ov-label">LINE公式アカウント作成（無料）</div>
+      </div>
+      <div class="ov-step line-step">
+        <div class="ov-num">2</div>
+        <div class="ov-label">Messaging API有効化</div>
+      </div>
+      <div class="ov-step">
+        <div class="ov-num">3</div>
+        <div class="ov-label">アクセストークン取得</div>
+      </div>
+      <div class="ov-step">
+        <div class="ov-num">4</div>
+        <div class="ov-label">登録フォームで設定完了</div>
+      </div>
     </div>
-    <div class="step-body">
-      <ul class="op-list">
-        <li>
-          <div class="op-num">1</div>
-          <div class="op-text">LINE Official Account Managerにログイン<br>
-            <span class="op-url">https://manager.line.biz/</span>
-          </div>
-        </li>
-        <li>
-          <div class="op-num">2</div>
-          <div class="op-text">作成したアカウントを選択 → 右上の「設定」をクリック</div>
-        </li>
-        <li>
-          <div class="op-num">3</div>
-          <div class="op-text">左メニュー「Messaging API」→「Messaging APIを利用する」ボタンをクリック</div>
-        </li>
-        <li>
-          <div class="op-num">4</div>
-          <div class="op-text">プロバイダーの選択画面で「新規プロバイダーを作成」→ プロバイダー名を入力（店舗名でOK）→「同意する」</div>
-        </li>
-        <li>
-          <div class="op-num">5</div>
-          <div class="op-text">「OK」をクリックして有効化完了。画面に「Channel ID」が表示されることを確認</div>
-        </li>
-      </ul>
-      <div class="note"><span class="note-icon">⚠️</span>「Messaging APIを利用する」ボタンが見当たらない場合は、一度ログアウトして再ログインしてみてください</div>
-    </div>
-  </div>
 
-  <!-- STEP 3 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">3</div>
-      <div class="step-title">アクセストークンとユーザーIDを取得する</div>
-      <div class="step-time">⏱ 約5分</div>
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-header line">
+        <div class="step-num">1</div>
+        <div class="step-title">LINE公式アカウントを作成する</div>
+        <div class="step-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          約5分
+        </div>
+      </div>
+      <div class="step-body">
+        <ul class="op-list">
+          <li>
+            <div class="op-num">1</div>
+            <div class="op-text">スマートフォンまたはパソコンで下記URLを開く<br>
+              <span class="op-url">https://www.lycbiz.com/jp/signup/landingpage/lineoa/</span>
+            </div>
+          </li>
+          <li>
+            <div class="op-num">2</div>
+            <div class="op-text">「LINE公式アカウント 開設する（無料）」ボタンをクリックし、個人のLINEアカウントでログイン</div>
+          </li>
+          <li>
+            <div class="op-num">3</div>
+            <div class="op-text">必要情報を入力する<br>
+              ・アカウント名：店舗名（例：〇〇ヘアサロン）<br>
+              ・業種：美容（ヘアサロン等）<br>
+              ・メールアドレス：店舗用のメールアドレス
+            </div>
+          </li>
+          <li>
+            <div class="op-num">4</div>
+            <div class="op-text">「このプランにする」→「コミュニケーションプラン（無料）」を選択して完了</div>
+          </li>
+        </ul>
+        <div class="tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          アカウント名はお客様に表示される名前です。後から変更できるので仮の名前でもOK
+        </div>
+      </div>
     </div>
-    <div class="step-body">
-      <ul class="op-list">
-        <li>
-          <div class="op-num">1</div>
-          <div class="op-text">LINE Developersコンソールを開く<br>
-            <span class="op-url">https://developers.line.biz/console/</span>
-          </div>
-        </li>
-        <li>
-          <div class="op-num">2</div>
-          <div class="op-text">左メニューから作成したプロバイダー → Messaging APIチャネルを選択</div>
-        </li>
-        <li>
-          <div class="op-num">3</div>
-          <div class="op-text">「Messaging API設定」タブ → 下にスクロールして「チャネルアクセストークン（長期）」の「発行」ボタンをクリック → 発行されたトークンをコピーして下の表に記録</div>
-        </li>
-        <li>
-          <div class="op-num">4</div>
-          <div class="op-text">「チャネル基本設定」タブ → 「あなたのユーザーID」をコピーして下の表に記録</div>
-        </li>
-      </ul>
 
-      <!-- 記録表 -->
-      <table class="input-table" style="margin-top:12px;">
-        <thead>
-          <tr>
-            <th>項目</th>
-            <th>取得した値（ここに記入）</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>チャネルアクセストークン</td>
-            <td class="write-here">例: eyJhbGci... （長い文字列）</td>
-          </tr>
-          <tr>
-            <td>あなたのユーザーID</td>
-            <td class="write-here">例: U1234abcd...</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="note"><span class="note-icon">🔒</span>アクセストークンは他人に教えないでください。LINEボットを操作できる大切な情報です</div>
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-header line">
+        <div class="step-num">2</div>
+        <div class="step-title">Messaging APIを有効にする</div>
+        <div class="step-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          約5分
+        </div>
+      </div>
+      <div class="step-body">
+        <ul class="op-list">
+          <li>
+            <div class="op-num">1</div>
+            <div class="op-text">LINE Official Account Managerにログイン<br>
+              <span class="op-url">https://manager.line.biz/</span>
+            </div>
+          </li>
+          <li>
+            <div class="op-num">2</div>
+            <div class="op-text">作成したアカウントを選択 → 右上の「設定」をクリック</div>
+          </li>
+          <li>
+            <div class="op-num">3</div>
+            <div class="op-text">左メニュー「Messaging API」→「Messaging APIを利用する」ボタンをクリック</div>
+          </li>
+          <li>
+            <div class="op-num">4</div>
+            <div class="op-text">プロバイダーの選択画面で「新規プロバイダーを作成」→ プロバイダー名を入力（店舗名でOK）→「同意する」</div>
+          </li>
+          <li>
+            <div class="op-num">5</div>
+            <div class="op-text">「OK」をクリックして有効化完了。画面に「Channel ID」が表示されることを確認</div>
+          </li>
+        </ul>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          「Messaging APIを利用する」ボタンが見当たらない場合は、一度ログアウトして再ログインしてみてください
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- STEP 4 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">4</div>
-      <div class="step-title">登録フォームで設定を完了する</div>
-      <div class="step-time">⏱ 約3分</div>
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title">アクセストークンとユーザーIDを取得する</div>
+        <div class="step-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          約5分
+        </div>
+      </div>
+      <div class="step-body">
+        <ul class="op-list">
+          <li>
+            <div class="op-num">1</div>
+            <div class="op-text">LINE Developersコンソールを開く<br>
+              <span class="op-url">https://developers.line.biz/console/</span>
+            </div>
+          </li>
+          <li>
+            <div class="op-num">2</div>
+            <div class="op-text">左メニューから作成したプロバイダー → Messaging APIチャネルを選択</div>
+          </li>
+          <li>
+            <div class="op-num">3</div>
+            <div class="op-text">「Messaging API設定」タブ → 下にスクロールして「チャネルアクセストークン（長期）」の「発行」ボタンをクリック → 発行されたトークンをコピーして下の表に記録</div>
+          </li>
+          <li>
+            <div class="op-num">4</div>
+            <div class="op-text">「チャネル基本設定」タブ → 「あなたのユーザーID」をコピーして下の表に記録</div>
+          </li>
+        </ul>
+        <table class="input-table">
+          <thead>
+            <tr><th>項目</th><th>取得した値（ここに記入）</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>チャネルアクセストークン</td>
+              <td class="write-here">例: eyJhbGci... （長い文字列）</td>
+            </tr>
+            <tr>
+              <td>あなたのユーザーID</td>
+              <td class="write-here">例: U1234abcd...</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          アクセストークンは他人に教えないでください。LINEボットを操作できる大切な情報です
+        </div>
+      </div>
     </div>
-    <div class="step-body">
-      <ul class="op-list">
-        <li>
-          <div class="op-num">1</div>
-          <div class="op-text">下記URLを開く<br>
-            <span class="op-url">https://yosinn1-blip.github.io/yoshiki-apps/wizard.html</span>
-          </div>
-        </li>
-        <li>
-          <div class="op-num">2</div>
-          <div class="op-text">「店舗名」「業種」を入力（例：〇〇ヘアサロン、美容室）</div>
-        </li>
-        <li>
-          <div class="op-num">3</div>
-          <div class="op-text">STEP3で取得した「チャネルアクセストークン」と「ユーザーID」を貼り付ける</div>
-        </li>
-        <li>
-          <div class="op-num">4</div>
-          <div class="op-text">「登録する」ボタンをクリック → 画面に「店舗ID」と「APIキー」が表示されたら完了</div>
-        </li>
-        <li>
-          <div class="op-num">5</div>
-          <div class="op-text">表示された「店舗ID」と「APIキー」をメモする（再表示できないので必ず保存）</div>
-        </li>
-      </ul>
-      <div class="tip">🎉 登録完了後、LINEの公式アカウントに「MEO Harness 通知テスト」というメッセージが届きます。届いたら設定成功です！</div>
-    </div>
-  </div>
 
-  <!-- 完了チェックリスト -->
-  <div class="checklist">
-    <div class="checklist-title">✅ セットアップ完了チェックリスト</div>
-    <div class="check-item"><div class="check-box"></div>LINE公式アカウントを作成した</div>
-    <div class="check-item"><div class="check-box"></div>Messaging APIを有効にした</div>
-    <div class="check-item"><div class="check-box"></div>チャネルアクセストークンを取得した</div>
-    <div class="check-item"><div class="check-box"></div>ユーザーIDを取得した</div>
-    <div class="check-item"><div class="check-box"></div>wizard.htmlで登録を完了した</div>
-    <div class="check-item"><div class="check-box"></div>テスト通知がLINEに届いた</div>
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <div class="step-title">登録フォームで設定を完了する</div>
+        <div class="step-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          約3分
+        </div>
+      </div>
+      <div class="step-body">
+        <ul class="op-list">
+          <li>
+            <div class="op-num">1</div>
+            <div class="op-text">下記URLを開く<br>
+              <span class="op-url">https://yosinn1-blip.github.io/yoshiki-apps/wizard.html</span>
+            </div>
+          </li>
+          <li>
+            <div class="op-num">2</div>
+            <div class="op-text">「店舗名」「業種」を入力（例：〇〇ヘアサロン、美容室）</div>
+          </li>
+          <li>
+            <div class="op-num">3</div>
+            <div class="op-text">STEP 3で取得した「チャネルアクセストークン」と「ユーザーID」を貼り付ける</div>
+          </li>
+          <li>
+            <div class="op-num">4</div>
+            <div class="op-text">「登録する」ボタンをクリック → 画面に「店舗ID」と「APIキー」が表示されたら完了</div>
+          </li>
+          <li>
+            <div class="op-num">5</div>
+            <div class="op-text">表示された「店舗ID」と「APIキー」をメモする（再表示できないので必ず保存）</div>
+          </li>
+        </ul>
+        <div class="tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          登録完了後、LINEの公式アカウントに「MEO Harness 通知テスト」というメッセージが届きます。届いたら設定成功です！
+        </div>
+      </div>
+    </div>
+
+    <!-- チェックリスト -->
+    <div class="checklist">
+      <div class="checklist-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        セットアップ完了チェックリスト
+      </div>
+      <div class="checklist-body">
+        <div class="check-item"><div class="check-box"></div>LINE公式アカウントを作成した</div>
+        <div class="check-item"><div class="check-box"></div>Messaging APIを有効にした</div>
+        <div class="check-item"><div class="check-box"></div>チャネルアクセストークンを取得した</div>
+        <div class="check-item"><div class="check-box"></div>ユーザーIDを取得した</div>
+        <div class="check-item"><div class="check-box"></div>wizard.htmlで登録を完了した</div>
+        <div class="check-item"><div class="check-box"></div>テスト通知がLINEに届いた</div>
+      </div>
+    </div>
+
   </div>
 
   <!-- フッター -->
-  <div class="doc-footer">
-    <div>
+  <div class="footer-bar">
+    <div class="footer-contact">
       <strong>MEO Harness</strong> by Yoshiki Apps<br>
       困ったときは yosinn1@gmail.com までご連絡ください
     </div>
-    <div style="text-align:right;">
-      デモページ<br>
-      <strong>yosinn1-blip.github.io/yoshiki-apps/demo.html</strong>
+    <div class="footer-url-wrap">
+      <div class="footer-url-label">デモページ</div>
+      <div class="footer-url">yosinn1-blip.github.io/yoshiki-apps/demo.html</div>
     </div>
   </div>
 
 </div>
-
 </body>
 </html>
