@@ -13,12 +13,13 @@
   :root {
     --ink: #111827;
     --sub: #6b7280;
-    --accent: #2563eb;
+    --accent: #1d4ed8;
+    --accent-dark: #1e3a8a;
     --accent-light: #eff6ff;
-    --accent-mid: #dbeafe;
+    --accent-mid: #bfdbfe;
     --card: #ffffff;
     --border: #e5e7eb;
-    --bg-muted: #f9fafb;
+    --bg-muted: #f3f4f6;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +27,7 @@
   body {
     font-family: "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
     color: var(--ink);
-    background: #f0f2f5;
+    background: #d1d5db;
     line-height: 1.7;
   }
 
@@ -58,47 +59,48 @@
     min-height: 297mm;
     background: var(--card);
     margin: 24px auto;
-    padding: 14mm 15mm 12mm;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 16px rgba(0,0,0,.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    overflow: hidden;
   }
 
   /* ヒーロー */
   .hero {
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
+    background: var(--accent-dark);
+    padding: 22px 20mm 20px;
+    color: #fff;
   }
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: var(--accent-light);
-    color: var(--accent);
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
     border-radius: 999px;
     font-size: .72rem;
     font-weight: 600;
     letter-spacing: .04em;
     padding: 4px 12px;
     margin-bottom: 14px;
+    color: #bfdbfe;
   }
   .hero-badge svg { width: 10px; height: 10px; }
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 800;
-    line-height: 1.3;
+    line-height: 1.25;
     margin-bottom: 10px;
     letter-spacing: -.02em;
   }
   .hero h1 em {
     font-style: normal;
-    color: var(--accent);
+    color: #93c5fd;
   }
   .hero-sub {
-    font-size: .88rem;
-    color: var(--sub);
-    margin-bottom: 16px;
+    font-size: .9rem;
+    color: #bfdbfe;
+    margin-bottom: 18px;
   }
   .hero-pills {
     display: flex;
@@ -109,42 +111,54 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    border: 1.5px solid var(--border);
+    border: 1.5px solid rgba(255,255,255,.3);
     border-radius: 999px;
     font-size: .78rem;
     font-weight: 600;
-    color: var(--ink);
+    color: #fff;
     padding: 4px 13px;
+    background: rgba(255,255,255,.1);
   }
-  .pill svg { width: 13px; height: 13px; color: var(--accent); }
+  .pill svg { width: 13px; height: 13px; color: #93c5fd; }
+
+  /* 本文エリア */
+  .body {
+    padding: 20px 20mm 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
 
   /* 3ポイント */
   .points {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 18px;
   }
   .point {
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--accent-mid);
     border-radius: 12px;
     padding: 16px 14px 14px;
+    background: var(--accent-light);
   }
   .point-icon-wrap {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-    background: var(--accent-light);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
   }
-  .point-icon-wrap svg { width: 18px; height: 18px; color: var(--accent); }
+  .point-icon-wrap svg { width: 18px; height: 18px; color: #fff; }
   .point-title {
-    font-size: .88rem;
+    font-size: .9rem;
     font-weight: 700;
     margin-bottom: 5px;
+    color: var(--accent-dark);
   }
   .point-desc {
     font-size: .76rem;
@@ -155,22 +169,22 @@
   /* ビフォーアフター */
   .ba {
     display: grid;
-    grid-template-columns: 1fr 32px 1fr;
+    grid-template-columns: 1fr 36px 1fr;
     align-items: stretch;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
+    margin-bottom: 18px;
     border-radius: 12px;
     overflow: hidden;
+    border: 1.5px solid var(--border);
   }
-  .ba-side { padding: 15px 16px; }
+  .ba-side { padding: 14px 16px; }
   .ba-before { background: var(--bg-muted); }
-  .ba-after { background: var(--accent-light); }
+  .ba-after { background: var(--accent-dark); }
   .ba-divider {
     background: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .9rem;
+    font-size: 1rem;
     color: var(--sub);
     font-weight: 700;
   }
@@ -182,25 +196,25 @@
     margin-bottom: 8px;
     color: var(--sub);
   }
-  .ba-after .ba-label { color: var(--accent); }
+  .ba-after .ba-label { color: #93c5fd; }
   .ba-item {
     display: flex;
     align-items: flex-start;
     gap: 7px;
     font-size: .8rem;
     color: var(--sub);
-    line-height: 1.6;
-    margin-bottom: 2px;
+    line-height: 1.65;
+    margin-bottom: 1px;
   }
-  .ba-after .ba-item { color: var(--ink); }
+  .ba-after .ba-item { color: #e0f2fe; }
   .ba-item svg {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
     margin-top: 4px;
-    color: var(--sub);
+    color: #9ca3af;
   }
-  .ba-after .ba-item svg { color: var(--accent); }
+  .ba-after .ba-item svg { color: #93c5fd; }
 
   /* フロー */
   .section-title {
@@ -214,24 +228,25 @@
   .flow {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
   .flow-step {
-    padding: 14px 12px 12px;
+    padding: 14px 10px 12px;
     border-right: 1px solid var(--border);
     text-align: center;
+    background: #fff;
   }
   .flow-step:last-child { border-right: none; }
   .flow-num {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     background: var(--accent);
     color: #fff;
     border-radius: 50%;
-    font-size: .72rem;
+    font-size: .78rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -242,6 +257,7 @@
     font-size: .74rem;
     color: var(--sub);
     line-height: 1.5;
+    font-weight: 500;
   }
 
   /* 比較表 */
@@ -249,8 +265,8 @@
     width: 100%;
     border-collapse: collapse;
     font-size: .8rem;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
+    margin-bottom: 18px;
+    border: 1.5px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
   }
@@ -258,29 +274,33 @@
   th {
     padding: 10px 12px;
     font-size: .74rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--sub);
     text-align: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
   }
   th:first-child { text-align: left; }
-  th.ours { color: var(--accent); font-weight: 700; background: var(--accent-mid); }
+  th.ours {
+    color: #fff;
+    font-weight: 700;
+    background: var(--accent);
+  }
   td {
     padding: 9px 12px;
     border-top: 1px solid var(--border);
     color: var(--sub);
     text-align: center;
   }
-  td:first-child { text-align: left; color: var(--ink); font-weight: 500; }
-  td.ours { background: var(--accent-light); font-weight: 600; color: var(--ink); }
+  td:first-child { text-align: left; color: var(--ink); font-weight: 600; }
+  td.ours { background: var(--accent-light); font-weight: 700; color: var(--accent-dark); }
   .check { color: var(--accent); font-weight: 700; }
   .cross { color: #d1d5db; }
 
   /* フッター */
-  .footer {
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
+  .footer-bar {
+    background: var(--bg-muted);
+    border-top: 1.5px solid var(--border);
+    padding: 14px 20mm 12px;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 16px;
@@ -309,17 +329,19 @@
     background: var(--accent);
     color: #fff;
     font-weight: 700;
-    font-size: .7rem;
+    font-size: .72rem;
     border-radius: 5px;
-    padding: 2px 9px;
+    padding: 3px 10px;
     margin-bottom: 4px;
     letter-spacing: .03em;
   }
 
   .disclaimer {
-    font-size: .64rem;
+    font-size: .63rem;
     color: #9ca3af;
-    margin-top: 10px;
+    padding: 6px 20mm 8px;
+    background: var(--bg-muted);
+    border-top: 1px solid var(--border);
     line-height: 1.6;
   }
 </style>
@@ -363,136 +385,140 @@
     </div>
   </div>
 
-  <!-- 3ポイント -->
-  <div class="points">
-    <div class="point">
-      <div class="point-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      </div>
-      <div class="point-title">口コミをすぐ把握</div>
-      <div class="point-desc">新しいレビューが投稿されたら、あなたのLINEに即通知</div>
-    </div>
-    <div class="point">
-      <div class="point-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      </div>
-      <div class="point-title">AIが返信を下書き</div>
-      <div class="point-desc">星の数・内容に応じた丁寧な返信文をAIが自動で用意</div>
-    </div>
-    <div class="point">
-      <div class="point-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      </div>
-      <div class="point-title">コピペするだけ</div>
-      <div class="point-desc">下書きをそのままGoogleにコピペ。忙しくても返信できる</div>
-    </div>
-  </div>
+  <div class="body">
 
-  <!-- ビフォーアフター -->
-  <div class="ba">
-    <div class="ba-side ba-before">
-      <div class="ba-label">以前</div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        口コミに気づくのが遅れる
+    <!-- 3ポイント -->
+    <div class="points">
+      <div class="point">
+        <div class="point-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="point-title">口コミをすぐ把握</div>
+        <div class="point-desc">新しいレビューが投稿されたら、あなたのLINEに即通知</div>
       </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        返信文を毎回考えるのが大変
+      <div class="point">
+        <div class="point-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="point-title">AIが返信を下書き</div>
+        <div class="point-desc">星の数・内容に応じた丁寧な返信文をAIが自動で用意</div>
       </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        忙しくて後回しにしてしまう
-      </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        低評価が放置されてしまう…
-      </div>
-    </div>
-    <div class="ba-divider">→</div>
-    <div class="ba-side ba-after">
-      <div class="ba-label">MEO Harnessなら</div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        口コミが来たらLINEで即通知
-      </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        AIが返信の下書きを自動作成
-      </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        確認してコピペするだけ
-      </div>
-      <div class="ba-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        返信率アップ → 評価UP
+      <div class="point">
+        <div class="point-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </div>
+        <div class="point-title">コピペするだけ</div>
+        <div class="point-desc">下書きをそのままGoogleにコピペ。忙しくても返信できる</div>
       </div>
     </div>
-  </div>
 
-  <!-- 使い方フロー -->
-  <div class="section-title">使い方 — 4ステップで完了</div>
-  <div class="flow">
-    <div class="flow-step">
-      <div class="flow-num">1</div>
-      <div class="flow-label">LINE公式アカウントを作成（無料・5分）</div>
+    <!-- ビフォーアフター -->
+    <div class="ba">
+      <div class="ba-side ba-before">
+        <div class="ba-label">以前</div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          口コミに気づくのが遅れる
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          返信文を毎回考えるのが大変
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          忙しくて後回しにしてしまう
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          低評価が放置されてしまう…
+        </div>
+      </div>
+      <div class="ba-divider">→</div>
+      <div class="ba-side ba-after">
+        <div class="ba-label">MEO Harnessなら</div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          口コミが来たらLINEで即通知
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          AIが返信の下書きを自動作成
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          確認してコピペするだけ
+        </div>
+        <div class="ba-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          返信率アップ → 評価UP
+        </div>
+      </div>
     </div>
-    <div class="flow-step">
-      <div class="flow-num">2</div>
-      <div class="flow-label">ウィザードで初期設定（10分）</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">3</div>
-      <div class="flow-label">口コミが届いたらLINEに通知</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">4</div>
-      <div class="flow-label">下書きをGoogleにコピペして返信完了</div>
-    </div>
-  </div>
 
-  <!-- 比較表 -->
-  <div class="section-title">他のサービスとの比較</div>
-  <table>
-    <thead>
-      <tr>
-        <th>機能</th>
-        <th class="ours">MEO Harness（このサービス）</th>
-        <th>MEOチェキ</th>
-        <th>Canly</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>月額料金</td>
-        <td class="ours"><span class="check">無料</span></td>
-        <td>3,278円〜</td>
-        <td>要問い合わせ</td>
-      </tr>
-      <tr>
-        <td>AI返信下書き</td>
-        <td class="ours"><span class="check">✓ あり</span></td>
-        <td><span class="cross">なし</span></td>
-        <td><span class="cross">なし</span></td>
-      </tr>
-      <tr>
-        <td>LINEで通知</td>
-        <td class="ours"><span class="check">✓ あり</span></td>
-        <td><span class="cross">なし</span></td>
-        <td><span class="cross">なし</span></td>
-      </tr>
-      <tr>
-        <td>営業電話</td>
-        <td class="ours"><span class="check">✓ 一切なし</span></td>
-        <td><span class="cross">あり</span></td>
-        <td><span class="cross">あり</span></td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- 使い方フロー -->
+    <div class="section-title">使い方 — 4ステップで完了</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-label">LINE公式アカウントを作成（無料・5分）</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-label">ウィザードで初期設定（10分）</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-label">口コミが届いたらLINEに通知</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-label">下書きをGoogleにコピペして返信完了</div>
+      </div>
+    </div>
+
+    <!-- 比較表 -->
+    <div class="section-title">他のサービスとの比較</div>
+    <table>
+      <thead>
+        <tr>
+          <th>機能</th>
+          <th class="ours">MEO Harness（このサービス）</th>
+          <th>MEOチェキ</th>
+          <th>Canly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>月額料金</td>
+          <td class="ours"><span class="check">無料</span></td>
+          <td>3,278円〜</td>
+          <td>要問い合わせ</td>
+        </tr>
+        <tr>
+          <td>AI返信下書き</td>
+          <td class="ours"><span class="check">✓ あり</span></td>
+          <td><span class="cross">なし</span></td>
+          <td><span class="cross">なし</span></td>
+        </tr>
+        <tr>
+          <td>LINEで通知</td>
+          <td class="ours"><span class="check">✓ あり</span></td>
+          <td><span class="cross">なし</span></td>
+          <td><span class="cross">なし</span></td>
+        </tr>
+        <tr>
+          <td>営業電話</td>
+          <td class="ours"><span class="check">✓ 一切なし</span></td>
+          <td><span class="cross">あり</span></td>
+          <td><span class="cross">あり</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
 
   <!-- フッター -->
-  <div class="footer">
+  <div class="footer-bar">
     <div>
       <div class="footer-url-label">デモ・詳細はこちら（登録不要・無料）</div>
       <div class="footer-url">yosinn1-blip.github.io/yoshiki-apps/demo.html</div>
