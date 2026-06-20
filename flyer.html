@@ -11,16 +11,14 @@
   }
 
   :root {
-    --ink: #1d2230;
-    --sub: #5a6378;
+    --ink: #111827;
+    --sub: #6b7280;
     --accent: #2563eb;
-    --bg: #fafbfd;
+    --accent-light: #eff6ff;
+    --accent-mid: #dbeafe;
     --card: #ffffff;
-    --line: #e6e9f0;
-    --good: #15803d;
-    --good-bg: #e9f6ee;
-    --ai-bg: #f3f6fc;
-    --ai-line: #dbe6fa;
+    --border: #e5e7eb;
+    --bg-muted: #f9fafb;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,314 +26,300 @@
   body {
     font-family: "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
     color: var(--ink);
-    background: #e8ecf0;
+    background: #f0f2f5;
     line-height: 1.7;
   }
 
   .no-print {
-    text-align: center;
-    padding: 16px;
-    background: #333;
-    color: #fff;
-    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 24px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    font-size: .88rem;
+    color: var(--sub);
   }
+  .no-print strong { color: var(--ink); font-size: .9rem; }
   .no-print button {
-    margin-left: 12px;
-    padding: 6px 16px;
+    padding: 6px 18px;
     background: var(--accent);
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: .9rem;
+    font-size: .85rem;
+    font-weight: 600;
   }
+  .no-print a { color: var(--accent); font-size: .85rem; text-decoration: none; }
 
   .page {
     width: 210mm;
     min-height: 297mm;
     background: var(--card);
     margin: 24px auto;
-    padding: 14mm 14mm 12mm;
+    padding: 14mm 15mm 12mm;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    box-shadow: 0 2px 16px rgba(0,0,0,.08);
   }
 
-  /* ヘッダー */
+  /* ヒーロー */
   .hero {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
-    color: #fff;
-    border-radius: 14px;
-    padding: 22px 26px 20px;
-    margin-bottom: 18px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::after {
-    content: "★";
-    position: absolute;
-    right: 22px;
-    top: 16px;
-    font-size: 4rem;
-    opacity: .12;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
   }
   .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,.18);
-    border: 1px solid rgba(255,255,255,.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--accent-light);
+    color: var(--accent);
     border-radius: 999px;
     font-size: .72rem;
-    letter-spacing: .08em;
-    padding: 3px 12px;
-    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 4px 12px;
+    margin-bottom: 14px;
   }
+  .hero-badge svg { width: 10px; height: 10px; }
   .hero h1 {
-    font-size: 1.55rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: -.02em;
   }
   .hero h1 em {
     font-style: normal;
-    background: linear-gradient(90deg, #fde68a, #fbbf24);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
   .hero-sub {
     font-size: .88rem;
-    opacity: .88;
+    color: var(--sub);
+    margin-bottom: 16px;
   }
-  .hero-tags {
+  .hero-pills {
     display: flex;
     gap: 8px;
-    margin-top: 14px;
     flex-wrap: wrap;
   }
-  .hero-tag {
-    background: rgba(255,255,255,.2);
-    border: 1px solid rgba(255,255,255,.3);
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1.5px solid var(--border);
     border-radius: 999px;
-    font-size: .75rem;
-    padding: 3px 11px;
+    font-size: .78rem;
     font-weight: 600;
+    color: var(--ink);
+    padding: 4px 13px;
   }
+  .pill svg { width: 13px; height: 13px; color: var(--accent); }
 
   /* 3ポイント */
   .points {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
   .point {
-    background: var(--ai-bg);
-    border: 1px solid var(--ai-line);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 14px 14px 12px;
-    text-align: center;
+    padding: 16px 14px 14px;
   }
-  .point-icon {
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-    display: block;
+  .point-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
   }
+  .point-icon-wrap svg { width: 18px; height: 18px; color: var(--accent); }
   .point-title {
     font-size: .88rem;
     font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
   .point-desc {
     font-size: .76rem;
     color: var(--sub);
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   /* ビフォーアフター */
   .ba {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  .ba-side {
+    grid-template-columns: 1fr 32px 1fr;
+    align-items: stretch;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 14px;
+    overflow: hidden;
   }
-  .ba-before {
-    background: #fff5f5;
-    border: 1px solid #fecaca;
-  }
-  .ba-after {
-    background: var(--good-bg);
-    border: 1px solid #86efac;
-  }
-  .ba-label {
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-    margin-bottom: 6px;
+  .ba-side { padding: 15px 16px; }
+  .ba-before { background: var(--bg-muted); }
+  .ba-after { background: var(--accent-light); }
+  .ba-divider {
+    background: var(--border);
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    font-size: .9rem;
+    color: var(--sub);
+    font-weight: 700;
   }
-  .ba-before .ba-label { color: #b91c1c; }
-  .ba-after .ba-label { color: var(--good); }
-  .ba-text {
+  .ba-label {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--sub);
+  }
+  .ba-after .ba-label { color: var(--accent); }
+  .ba-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
     font-size: .8rem;
     color: var(--sub);
     line-height: 1.6;
+    margin-bottom: 2px;
   }
-  .ba-arrow {
-    font-size: 1.5rem;
-    color: var(--accent);
-    text-align: center;
+  .ba-after .ba-item { color: var(--ink); }
+  .ba-item svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    color: var(--sub);
   }
+  .ba-after .ba-item svg { color: var(--accent); }
 
-  /* 使い方フロー */
-  .flow-title {
-    font-size: .82rem;
+  /* フロー */
+  .section-title {
+    font-size: .74rem;
     font-weight: 700;
-    color: var(--accent);
-    letter-spacing: .06em;
+    color: var(--sub);
+    letter-spacing: .1em;
+    text-transform: uppercase;
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
   }
-  .flow-title::before { content: ""; display: block; width: 3px; height: 1em; background: var(--accent); border-radius: 2px; }
   .flow {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
   }
   .flow-step {
+    padding: 14px 12px 12px;
+    border-right: 1px solid var(--border);
     text-align: center;
-    position: relative;
   }
-  .flow-step::after {
-    content: "→";
-    position: absolute;
-    right: -8px;
-    top: 14px;
-    font-size: .9rem;
-    color: var(--sub);
-  }
-  .flow-step:last-child::after { display: none; }
+  .flow-step:last-child { border-right: none; }
   .flow-num {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background: var(--accent);
     color: #fff;
     border-radius: 50%;
-    font-size: .8rem;
+    font-size: .72rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 6px;
+    margin: 0 auto 8px;
   }
-  .flow-icon { font-size: 1.4rem; margin-bottom: 4px; }
   .flow-label {
-    font-size: .72rem;
+    font-size: .74rem;
     color: var(--sub);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   /* 比較表 */
-  .compare-title {
-    font-size: .82rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: .06em;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .compare-title::before { content: ""; display: block; width: 3px; height: 1em; background: var(--accent); border-radius: 2px; }
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: .78rem;
-    margin-bottom: 16px;
+    font-size: .8rem;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
   }
+  thead tr { background: var(--bg-muted); }
   th {
-    padding: 8px 10px;
-    font-size: .72rem;
-    font-weight: 700;
-    border-bottom: 2px solid var(--line);
+    padding: 10px 12px;
+    font-size: .74rem;
+    font-weight: 600;
+    color: var(--sub);
     text-align: center;
+    border-bottom: 1px solid var(--border);
   }
-  th.ours {
-    background: var(--accent);
-    color: #fff;
-    border-radius: 6px 6px 0 0;
-  }
+  th:first-child { text-align: left; }
+  th.ours { color: var(--accent); font-weight: 700; background: var(--accent-mid); }
   td {
-    padding: 7px 10px;
-    border-bottom: 1px solid var(--line);
+    padding: 9px 12px;
+    border-top: 1px solid var(--border);
     color: var(--sub);
     text-align: center;
   }
   td:first-child { text-align: left; color: var(--ink); font-weight: 500; }
-  td.ours { background: #eaf1ff; font-weight: 700; color: var(--accent); }
-  .check { color: var(--good); font-weight: 700; }
-  .cross { color: #b91c1c; }
+  td.ours { background: var(--accent-light); font-weight: 600; color: var(--ink); }
+  .check { color: var(--accent); font-weight: 700; }
+  .cross { color: #d1d5db; }
 
   /* フッター */
   .footer {
     margin-top: auto;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: end;
   }
-  .footer-cta {
-    background: var(--accent);
-    color: #fff;
-    border-radius: 12px;
-    padding: 14px 22px;
-    flex: 1;
-  }
-  .footer-cta-label {
+  .footer-url-label {
     font-size: .72rem;
-    opacity: .85;
+    color: var(--sub);
     margin-bottom: 3px;
   }
-  .footer-cta-url {
+  .footer-url {
     font-size: 1rem;
     font-weight: 700;
+    color: var(--accent);
     word-break: break-all;
+    letter-spacing: -.01em;
   }
   .footer-info {
     font-size: .72rem;
     color: var(--sub);
-    line-height: 1.8;
+    line-height: 1.9;
     text-align: right;
   }
-  .footer-free {
+  .footer-badge {
     display: inline-block;
-    background: #fef9c3;
-    border: 1px solid #fde047;
-    color: #854d0e;
+    background: var(--accent);
+    color: #fff;
     font-weight: 700;
-    font-size: .82rem;
-    border-radius: 6px;
-    padding: 2px 8px;
+    font-size: .7rem;
+    border-radius: 5px;
+    padding: 2px 9px;
     margin-bottom: 4px;
+    letter-spacing: .03em;
   }
 
   .disclaimer {
     font-size: .64rem;
     color: #9ca3af;
-    margin-top: 6px;
+    margin-top: 10px;
     line-height: 1.6;
   }
 </style>
@@ -343,41 +327,62 @@
 <body>
 
 <div class="no-print">
-  MEO Harness チラシ（A4印刷用）
+  <strong>MEO Harness チラシ（A4印刷用）</strong>
   <button onclick="window.print()">印刷 / PDF保存</button>
-  <a href="setup-guide.html" style="color:#93c5fd;margin-left:16px;font-size:.9rem;">→ セットアップ手順書</a>
-  <a href="demo.html" style="color:#93c5fd;margin-left:12px;font-size:.9rem;">→ デモを見る</a>
+  <a href="setup-guide.html">→ セットアップ手順書</a>
+  <a href="demo.html">→ デモを見る</a>
 </div>
 
 <div class="page">
 
-  <!-- ヘッダー -->
+  <!-- ヒーロー -->
   <div class="hero">
-    <div class="hero-badge">Googleビジネスプロフィールをお持ちの店舗向け 完全無料ツール</div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Googleビジネスプロフィールをお持ちの店舗向け · 完全無料
+    </div>
     <h1>Googleの口コミに<br><em>AIが自動で返信の下書き</em>を作ります</h1>
     <div class="hero-sub">新しい口コミが来たらLINEで通知 → AIが返信文を用意 → コピペするだけ</div>
-    <div class="hero-tags">
-      <span class="hero-tag">💰 完全0円</span>
-      <span class="hero-tag">📱 LINEに通知</span>
-      <span class="hero-tag">🤖 AI自動生成</span>
-      <span class="hero-tag">🚫 営業電話なし</span>
+    <div class="hero-pills">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        完全0円
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        LINEに通知
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        AI自動生成
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        営業電話なし
+      </span>
     </div>
   </div>
 
   <!-- 3ポイント -->
   <div class="points">
     <div class="point">
-      <span class="point-icon">🔔</span>
+      <div class="point-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
       <div class="point-title">口コミをすぐ把握</div>
       <div class="point-desc">新しいレビューが投稿されたら、あなたのLINEに即通知</div>
     </div>
     <div class="point">
-      <span class="point-icon">✍️</span>
+      <div class="point-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
       <div class="point-title">AIが返信を下書き</div>
       <div class="point-desc">星の数・内容に応じた丁寧な返信文をAIが自動で用意</div>
     </div>
     <div class="point">
-      <span class="point-icon">📋</span>
+      <div class="point-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </div>
       <div class="point-title">コピペするだけ</div>
       <div class="point-desc">下書きをそのままGoogleにコピペ。忙しくても返信できる</div>
     </div>
@@ -386,58 +391,74 @@
   <!-- ビフォーアフター -->
   <div class="ba">
     <div class="ba-side ba-before">
-      <div class="ba-label">😓 今まで</div>
-      <div class="ba-text">
-        口コミに気づくのが遅れる<br>
-        返信文を毎回考えるのが大変<br>
-        忙しくて後回しにしてしまう<br>
-        気づいたら低評価が放置に…
+      <div class="ba-label">以前</div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        口コミに気づくのが遅れる
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        返信文を毎回考えるのが大変
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        忙しくて後回しにしてしまう
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        低評価が放置されてしまう…
       </div>
     </div>
-    <div class="ba-arrow">→</div>
+    <div class="ba-divider">→</div>
     <div class="ba-side ba-after">
-      <div class="ba-label">😊 MEO Harnessなら</div>
-      <div class="ba-text">
-        口コミが来たらLINEで即通知<br>
-        AIが返信の下書きを自動作成<br>
-        確認してコピペするだけ<br>
+      <div class="ba-label">MEO Harnessなら</div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        口コミが来たらLINEで即通知
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        AIが返信の下書きを自動作成
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        確認してコピペするだけ
+      </div>
+      <div class="ba-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         返信率アップ → 評価UP
       </div>
     </div>
   </div>
 
   <!-- 使い方フロー -->
-  <div class="flow-title">使い方</div>
+  <div class="section-title">使い方 — 4ステップで完了</div>
   <div class="flow">
     <div class="flow-step">
       <div class="flow-num">1</div>
-      <div class="flow-icon">📲</div>
       <div class="flow-label">LINE公式アカウントを作成（無料・5分）</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">2</div>
-      <div class="flow-icon">🔧</div>
       <div class="flow-label">ウィザードで初期設定（10分）</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">3</div>
-      <div class="flow-icon">🔔</div>
-      <div class="flow-label">口コミが届いたらLINEに通知が来る</div>
+      <div class="flow-label">口コミが届いたらLINEに通知</div>
     </div>
     <div class="flow-step">
       <div class="flow-num">4</div>
-      <div class="flow-icon">📋</div>
       <div class="flow-label">下書きをGoogleにコピペして返信完了</div>
     </div>
   </div>
 
   <!-- 比較表 -->
-  <div class="compare-title">他のサービスとの比較</div>
+  <div class="section-title">他のサービスとの比較</div>
   <table>
     <thead>
       <tr>
-        <th style="text-align:left;">機能</th>
-        <th class="ours">MEO Harness<br><span style="font-size:.68rem;font-weight:400;">（このサービス）</span></th>
+        <th>機能</th>
+        <th class="ours">MEO Harness（このサービス）</th>
         <th>MEOチェキ</th>
         <th>Canly</th>
       </tr>
@@ -445,25 +466,25 @@
     <tbody>
       <tr>
         <td>月額料金</td>
-        <td class="ours">無料 🎉</td>
+        <td class="ours"><span class="check">無料</span></td>
         <td>3,278円〜</td>
         <td>要問い合わせ</td>
       </tr>
       <tr>
         <td>AI返信下書き</td>
-        <td class="ours"><span class="check">✓</span> あり</td>
-        <td><span class="cross">✗</span> なし</td>
-        <td><span class="cross">✗</span> なし</td>
+        <td class="ours"><span class="check">✓ あり</span></td>
+        <td><span class="cross">なし</span></td>
+        <td><span class="cross">なし</span></td>
       </tr>
       <tr>
         <td>LINEで通知</td>
-        <td class="ours"><span class="check">✓</span> あり</td>
-        <td><span class="cross">✗</span> なし</td>
-        <td><span class="cross">✗</span> なし</td>
+        <td class="ours"><span class="check">✓ あり</span></td>
+        <td><span class="cross">なし</span></td>
+        <td><span class="cross">なし</span></td>
       </tr>
       <tr>
         <td>営業電話</td>
-        <td class="ours"><span class="check">✓</span> 一切なし</td>
+        <td class="ours"><span class="check">✓ 一切なし</span></td>
         <td><span class="cross">あり</span></td>
         <td><span class="cross">あり</span></td>
       </tr>
@@ -472,24 +493,21 @@
 
   <!-- フッター -->
   <div class="footer">
-    <div class="footer-cta">
-      <div class="footer-cta-label">デモ・詳細はこちら（登録不要・無料）</div>
-      <div class="footer-cta-url">yosinn1-blip.github.io/yoshiki-apps/demo.html</div>
+    <div>
+      <div class="footer-url-label">デモ・詳細はこちら（登録不要・無料）</div>
+      <div class="footer-url">yosinn1-blip.github.io/yoshiki-apps/demo.html</div>
     </div>
     <div class="footer-info">
-      <div class="footer-free">完全0円 · 登録不要</div><br>
-      MEO Harness<br>
-      Yoshiki Apps<br>
+      <span class="footer-badge">完全0円 · 登録不要</span><br>
+      MEO Harness / Yoshiki Apps<br>
       yosinn1@gmail.com
     </div>
   </div>
 
   <div class="disclaimer">
-    ※AIが生成する返信はあくまで下書きです。投稿前に内容をご確認ください。
-    ※Googleビジネスプロフィールのオーナー確認が完了している店舗が対象です。
+    ※AIが生成する返信はあくまで下書きです。投稿前に内容をご確認ください。　※Googleビジネスプロフィールのオーナー確認が完了している店舗が対象です。
   </div>
 
 </div>
-
 </body>
 </html>
