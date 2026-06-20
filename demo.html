@@ -19,84 +19,104 @@
 <meta name="twitter:image" content="https://yosinn1-blip.github.io/yoshiki-apps/assets/demo-og.png">
 <style>
   :root{
-    --ink:#1d2230;--sub:#5a6378;--accent:#2563eb;--bg:#fafbfd;--card:#ffffff;--line:#e6e9f0;
-    --star:#f5a623;--good:#15803d;--good-bg:#e9f6ee;--bad:#b91c1c;--bad-bg:#fdecec;
-    --ai-bg:#f3f6fc;--ai-line:#dbe6fa;--radius:12px;
+    --ink:#111827;--sub:#6b7280;--accent:#1d4ed8;--accent-dark:#1e3a8a;
+    --accent-light:#eff6ff;--accent-mid:#bfdbfe;
+    --card:#ffffff;--border:#e5e7eb;--bg-muted:#f3f4f6;
+    --line-green:#06C755;--line-dark:#059142;--line-light:#e8faf0;--line-mid:#bbf7d0;
+    --star:#f59e0b;--good:#16a34a;--good-bg:#f0fdf4;--bad:#dc2626;--bad-bg:#fef2f2;
+    --radius:12px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.8;-webkit-text-size-adjust:100%}
+  body{font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:#f0f2f5;line-height:1.8;-webkit-text-size-adjust:100%}
   .wrap{max-width:760px;margin:0 auto;padding:0 22px}
   a{color:var(--accent)}
 
-  header.hero{padding:64px 0 40px;background:var(--card);border-bottom:1px solid var(--line)}
-  .badge{display:inline-block;font-size:.78rem;letter-spacing:.04em;color:var(--accent);background:#eaf1ff;border:1px solid var(--ai-line);padding:4px 12px;border-radius:999px}
-  h1{font-size:1.72rem;letter-spacing:.01em;margin-top:16px}
-  .lead{color:var(--sub);margin-top:12px;font-size:1.05rem}
-  .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:.9rem;color:var(--sub)}
-  .trust span{display:inline-flex;align-items:center;gap:6px}
-  .trust b{color:var(--good);font-weight:700}
+  /* ヒーロー */
+  header.hero{padding:52px 0 36px;background:var(--accent-dark);border-bottom:none}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;letter-spacing:.04em;color:#bfdbfe;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px}
+  h1{font-size:1.72rem;font-weight:800;letter-spacing:-.01em;margin-top:14px;color:#fff;line-height:1.3}
+  .lead{color:#bfdbfe;margin-top:10px;font-size:1rem}
+  .trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .trust span{display:inline-flex;align-items:center;gap:5px;border:1.5px solid rgba(255,255,255,.3);border-radius:999px;font-size:.78rem;font-weight:600;color:#fff;padding:4px 13px;background:rgba(255,255,255,.1)}
+  .trust span.line-pill{border-color:var(--line-green);color:var(--line-green);background:rgba(6,199,85,.12)}
 
-  section{padding:40px 0;border-bottom:1px solid var(--line)}
-  h2{font-size:1.18rem;color:var(--accent);margin-bottom:6px}
-  .h2sub{color:var(--sub);font-size:.92rem;margin-bottom:20px}
+  /* セクション */
+  section{padding:36px 0;border-bottom:1px solid var(--border);background:#fff}
+  section:nth-of-type(even){background:var(--bg-muted)}
+  h2{font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:5px}
+  .h2sub{color:var(--sub);font-size:.9rem;margin-bottom:20px}
 
-  .note{font-size:.84rem;color:var(--sub);background:#f6f8fc;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:0 0 18px}
-  .tabs{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap}
-  .tab{font:inherit;font-size:.9rem;padding:7px 16px;border-radius:999px;border:1px solid var(--ai-line);background:#fff;color:var(--sub);cursor:pointer;transition:all .15s}
-  .tab:hover{background:#eaf1ff}
-  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  /* ノート */
+  .note{font-size:.83rem;color:var(--sub);background:var(--bg-muted);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;margin:0 0 18px;line-height:1.7}
+
+  /* タブ */
+  .tabs{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+  .tab{font:inherit;font-size:.86rem;padding:6px 16px;border-radius:999px;border:1.5px solid var(--border);background:#fff;color:var(--sub);cursor:pointer;transition:all .15s;font-weight:500}
+  .tab:hover{background:var(--accent-light);border-color:var(--accent-mid);color:var(--accent)}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
   .ind-group{display:none}
   .ind-group.active{display:block}
 
-  .store{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
-  .store-name{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
-  .store-pin{color:var(--accent)}
-  .store-meta{font-size:.86rem;color:var(--sub)}
+  /* 店舗情報 */
+  .store{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px;padding-bottom:10px;border-bottom:1.5px solid var(--border)}
+  .store-name{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:8px}
+  .store-pin{color:var(--accent);font-size:.8rem}
+  .store-meta{font-size:.84rem;color:var(--sub)}
 
-  .rev{padding:22px 0;border-top:1px solid var(--line)}
-  .rev:first-of-type{border-top:none}
+  /* 口コミ */
+  .rev{padding:20px 0;border-top:1px solid var(--border)}
+  .rev:first-of-type{border-top:none;padding-top:12px}
   .rev-head{display:flex;align-items:center;gap:12px}
-  .avatar{width:38px;height:38px;border-radius:50%;background:#eef1f7;color:var(--sub);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;flex-shrink:0}
+  .avatar{width:36px;height:36px;border-radius:50%;background:var(--bg-muted);color:var(--sub);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0;border:1.5px solid var(--border)}
   .rev-meta{flex:1;min-width:0}
-  .rev-name{font-weight:700;font-size:.96rem}
-  .stars{font-size:.92rem;letter-spacing:1px}
+  .rev-name{font-weight:700;font-size:.94rem}
+  .stars{font-size:.9rem;letter-spacing:1px}
   .stars .on{color:var(--star)}
-  .stars .off{color:#d6dae3}
-  .rev-date{font-size:.82rem;color:var(--sub)}
-  .chip{font-size:.74rem;padding:2px 8px;border-radius:999px;white-space:nowrap}
-  .chip.low{background:var(--bad-bg);color:var(--bad)}
-  .chip.mid{background:#eef1f7;color:var(--sub)}
-  .chip.high{background:var(--good-bg);color:var(--good)}
-  .rev-text{margin:10px 0 0;font-size:.96rem}
+  .stars .off{color:#d1d5db}
+  .rev-date{font-size:.8rem;color:var(--sub)}
+  .chip{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .chip.low{background:var(--bad-bg);color:var(--bad);border:1px solid #fecaca}
+  .chip.mid{background:var(--bg-muted);color:var(--sub);border:1px solid var(--border)}
+  .chip.high{background:var(--good-bg);color:var(--good);border:1px solid #bbf7d0}
+  .rev-text{margin:10px 0 0;font-size:.94rem;line-height:1.75}
 
-  .draft{margin-top:12px;background:var(--ai-bg);border:1px solid var(--ai-line);border-radius:var(--radius);padding:12px 14px}
-  .draft-label{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--accent);font-weight:700}
-  .draft-text{margin:7px 0 0;font-size:.93rem;color:#27313f}
+  /* AI下書き */
+  .draft{margin-top:12px;background:var(--accent-light);border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:12px 14px}
+  .draft-label{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .draft-text{margin:8px 0 0;font-size:.91rem;color:var(--ink);line-height:1.75}
   .draft-actions{display:flex;gap:8px;margin-top:12px}
-  button.copy{font:inherit;font-size:.82rem;color:var(--accent);background:#fff;border:1px solid var(--ai-line);border-radius:8px;padding:5px 12px;cursor:pointer;transition:background .15s}
-  button.copy:hover{background:#eaf1ff}
-  button.copy.done{color:var(--good);border-color:#bfe3cd;background:var(--good-bg)}
+  button.copy{font:inherit;font-size:.8rem;font-weight:600;color:var(--accent);background:#fff;border:1.5px solid var(--accent-mid);border-radius:8px;padding:5px 13px;cursor:pointer;transition:all .15s}
+  button.copy:hover{background:var(--accent-light)}
+  button.copy.done{color:var(--line-dark);border-color:var(--line-mid);background:var(--line-light)}
 
-  table.cmp{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:4px}
-  table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
-  table.cmp thead th{background:#f3f6fc}
-  table.cmp td.us{color:var(--good);font-weight:700;background:#f4faf6}
+  /* 比較表 */
+  table.cmp{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px;border:1.5px solid var(--border);border-radius:12px;overflow:hidden}
+  table.cmp th,table.cmp td{border-top:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:middle}
+  table.cmp thead tr{background:var(--bg-muted)}
+  table.cmp thead th{border-top:none;border-bottom:1.5px solid var(--border);font-weight:700;color:var(--sub);font-size:.8rem}
+  table.cmp thead th.us{background:var(--accent);color:#fff}
+  table.cmp td.us{color:var(--accent-dark);font-weight:700;background:var(--accent-light)}
   table.cmp .x{color:var(--sub)}
 
-  .steps{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px}
-  .step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
-  .step-n{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#eaf1ff;color:var(--accent);font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
-  .step b{font-size:.96rem}
-  .step p{color:var(--sub);font-size:.88rem;margin-top:2px}
+  /* ステップ */
+  .steps{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .step{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;background:#fff}
+  .step-n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step:nth-child(3) .step-n{background:var(--line-green)}
+  .step b{font-size:.94rem;color:var(--ink)}
+  .step p{color:var(--sub);font-size:.86rem;margin-top:3px;line-height:1.6}
 
-  .cta{text-align:center}
-  .cta .btn{display:inline-block;margin:6px 6px 0;padding:12px 22px;border-radius:10px;font-weight:700;font-size:.96rem;text-decoration:none}
-  .cta .btn.primary{background:var(--accent);color:#fff}
-  .cta .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--ai-line)}
-  .cta .soon{font-size:.86rem;color:var(--sub);margin-top:16px}
+  /* CTA */
+  section.cta{background:var(--accent-dark);border-bottom:none;text-align:center}
+  section.cta h2{color:#fff}
+  section.cta .h2sub{color:#bfdbfe;text-align:center}
+  .cta .btn{display:inline-block;margin:8px 6px 0;padding:12px 24px;border-radius:10px;font-weight:700;font-size:.94rem;text-decoration:none}
+  .cta .btn.primary{background:#fff;color:var(--accent-dark)}
+  .cta .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+  .cta .soon{font-size:.84rem;color:#bfdbfe;margin-top:18px}
 
-  .disclaimer{font-size:.82rem;color:var(--sub);line-height:1.7}
-  footer{padding:30px 0 56px;color:var(--sub);font-size:.86rem;text-align:center}
+  .disclaimer{font-size:.8rem;color:var(--sub);line-height:1.7}
+  footer{padding:24px 0 48px;background:var(--bg-muted);border-top:1.5px solid var(--border);color:var(--sub);font-size:.84rem;text-align:center}
 </style>
 </head>
 <body>
@@ -107,10 +127,10 @@
     <h1>Googleの口コミに、AIが返信の下書きを出す。</h1>
     <p class="lead">未返信の口コミを並べて、AIが返信案を用意します。あとは確認して返すだけ。業種を選んで動きを試せます。</p>
     <div class="trust">
-      <span><b>登録不要</b></span>
-      <span><b>営業電話なし</b></span>
-      <span><b>0円</b>で動く</span>
-      <span>このページでそのまま確認</span>
+      <span>登録不要</span>
+      <span class="line-pill">LINEに通知</span>
+      <span>0円で動く</span>
+      <span>営業電話なし</span>
     </div>
   </div>
 </header>
@@ -496,7 +516,7 @@
     <p class="h2sub">いちばんの違いは「試すのに営業電話が要らない」こと。</p>
     <table class="cmp">
       <thead>
-        <tr><th>　</th><th>MEOチェキ / Canly（有料）</th><th>MEO Harness（このツール）</th></tr>
+        <tr><th>　</th><th>MEOチェキ / Canly（有料）</th><th class="us">MEO Harness（このツール）</th></tr>
       </thead>
       <tbody>
         <tr><td>料金</td><td class="x">月3,278円〜（契約6ヶ月〜）</td><td class="us">0円</td></tr>
@@ -525,7 +545,7 @@
 
 <section class="cta">
   <div class="wrap">
-    <h2 style="color:var(--ink)">完全オープンソース・サーバー代0円</h2>
+    <h2>完全オープンソース・サーバー代0円</h2>
     <p class="h2sub" style="text-align:center">開発の経緯と仕組みはGitHubで公開しています。</p>
     <a class="btn primary" href="https://github.com/yosinn1-blip">GitHubで開発を見る →</a>
     <a class="btn ghost" href="index.html">Yoshiki Apps について</a>
