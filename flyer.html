@@ -317,9 +317,26 @@
     border-top: 1.5px solid var(--border);
     padding: 14px 20mm 12px;
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 16px;
+    grid-template-columns: 1fr auto auto;
+    gap: 20px;
     align-items: center;
+  }
+  .footer-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .footer-qr canvas, .footer-qr img {
+    display: block;
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .footer-qr-label {
+    font-size: .6rem;
+    color: var(--sub);
+    text-align: center;
+    line-height: 1.4;
   }
   .footer-url-label {
     font-size: .72rem;
@@ -538,6 +555,10 @@
       <div class="footer-url-label">デモ・詳細はこちら（登録不要・無料）</div>
       <div class="footer-url">yosinn1-blip.github.io/yoshiki-apps/demo.html</div>
     </div>
+    <div class="footer-qr">
+      <div id="qrcode"></div>
+      <div class="footer-qr-label">スキャンでデモへ</div>
+    </div>
     <div class="footer-info">
       <span class="footer-badge">完全0円 · 登録不要</span><br>
       MEO Harness / Yoshiki Apps<br>
@@ -550,5 +571,17 @@
   </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://yosinn1-blip.github.io/yoshiki-apps/demo.html",
+    width: 80,
+    height: 80,
+    colorDark: "#1e3a8a",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
 </body>
 </html>
