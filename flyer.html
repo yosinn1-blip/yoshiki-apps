@@ -20,6 +20,10 @@
     --card: #ffffff;
     --border: #e5e7eb;
     --bg-muted: #f3f4f6;
+    --line: #06C755;
+    --line-dark: #059142;
+    --line-light: #e8faf0;
+    --line-mid: #bbf7d0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -178,7 +182,7 @@
   }
   .ba-side { padding: 14px 16px; }
   .ba-before { background: var(--bg-muted); }
-  .ba-after { background: var(--accent-dark); }
+  .ba-after { background: var(--line-dark); }
   .ba-divider {
     background: var(--border);
     display: flex;
@@ -196,7 +200,7 @@
     margin-bottom: 8px;
     color: var(--sub);
   }
-  .ba-after .ba-label { color: #93c5fd; }
+  .ba-after .ba-label { color: var(--line-mid); }
   .ba-item {
     display: flex;
     align-items: flex-start;
@@ -206,7 +210,7 @@
     line-height: 1.65;
     margin-bottom: 1px;
   }
-  .ba-after .ba-item { color: #e0f2fe; }
+  .ba-after .ba-item { color: #e8faf0; }
   .ba-item svg {
     width: 13px;
     height: 13px;
@@ -214,7 +218,18 @@
     margin-top: 4px;
     color: #9ca3af;
   }
-  .ba-after .ba-item svg { color: #93c5fd; }
+  .ba-after .ba-item svg { color: var(--line-mid); }
+
+  /* LINE専用カラー */
+  .pill-line {
+    border-color: var(--line) !important;
+    color: var(--line-dark) !important;
+  }
+  .pill-line svg { color: var(--line) !important; }
+  .point-line { border-color: var(--line-mid) !important; background: var(--line-light) !important; }
+  .point-line .point-icon-wrap { background: var(--line) !important; }
+  .point-line .point-title { color: var(--line-dark) !important; }
+  .flow-num-line { background: var(--line) !important; }
 
   /* フロー */
   .section-title {
@@ -370,7 +385,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         完全0円
       </span>
-      <span class="pill">
+      <span class="pill pill-line">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         LINEに通知
       </span>
@@ -389,7 +404,7 @@
 
     <!-- 3ポイント -->
     <div class="points">
-      <div class="point">
+      <div class="point point-line">
         <div class="point-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
@@ -467,7 +482,7 @@
         <div class="flow-label">ウィザードで初期設定（10分）</div>
       </div>
       <div class="flow-step">
-        <div class="flow-num">3</div>
+        <div class="flow-num flow-num-line">3</div>
         <div class="flow-label">口コミが届いたらLINEに通知</div>
       </div>
       <div class="flow-step">
